@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap");
+button.accessButton {
+  background-color: #636363;
+  /* Green */
+  border: none;
+  border-radius: 30px;
+  color: white;
+  padding: 15px 32px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+button.accessButton:hover {
+  cursor: pointer;
+  background-color: #b1b1b1;
+}
+
+#banner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 200px;
+  width: 100%;
+  background-color: black;
+}
+
+#banner span {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 50px;
+}
+
+#banner #bannerImg {
+  height: 180px;
+  width: 300px;
+  text-align: center;
+  background-color: black;
+}
+
+#banner #bannerImg img {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+#banner #accessMenu {
+  position: absolute;
+  right: 5%;
+  top: 3%;
+}
+
+nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  width: 100%;
+}
+
+.active {
+  background-color: silver;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.active:hover {
+  background-color: #111;
+  color: white;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none;
+}
+/*# sourceMappingURL=styles.css.map */

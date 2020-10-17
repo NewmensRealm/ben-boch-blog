@@ -1,0 +1,16 @@
+button.accessButton {
+	background-color: #636363; /* Green */
+	border: none;
+	border-radius: 30px;
+	color: white;
+	padding: 15px 32px;
+	margin: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	&:hover {
+		cursor: pointer;
+		background-color: #b1b1b1;
+	}
+}

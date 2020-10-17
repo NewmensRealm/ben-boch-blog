@@ -1,0 +1,31 @@
+#banner {
+	display: flex;
+	align-items: center;
+	height: 200px;
+	width: 100%;
+	background-color: black;
+	//padding-left: 5%;
+	span {
+		color: white;
+		font-family: "Roboto", sans-serif;
+		font-weight: 100;
+		font-size: 50px;
+	}
+	#bannerImg {
+		height: 180px;
+		width: 300px;
+		text-align: center;
+		//margin-right: 2%;
+		background-color: black;
+		img {
+			position: relative;
+			width: 180px;
+			height: 180px;
+		}
+	}
+	#accessMenu {
+		position: absolute;
+		right: 5%;
+		top: 3%;
+	}
+}

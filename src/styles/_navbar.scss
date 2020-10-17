@@ -1,0 +1,40 @@
+nav {
+	position: sticky;
+	top: 0;
+	ul {
+		display: flex;
+		justify-content: center;
+		align-self: flex-start;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		background-color: #333;
+		width: 100%;
+	}
+}
+
+.active {
+	background-color: silver;
+	color: black;
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+	&:hover {
+		background-color: #111;
+		color: white;
+	}
+}
+
+li {
+	a {
+		display: block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-family: "Roboto", sans-serif;
+		font-weight: 100;
+		&:hover {
+			background-color: #111;
+		}
+	}
+}
