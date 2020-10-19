@@ -1,14 +1,35 @@
-button.accessButton {
-	background-color: #636363; /* Green */
+button:focus {
+	outline: 0;
+}
+
+button.default {
+	background-color: #575757;
 	border: none;
-	border-radius: 30px;
+	border-radius: 10%;
 	color: white;
-	padding: 15px 32px;
-	margin: 5px;
+	padding: 10px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
+	font-size: 20px;
+	margin: 5px;
+	&:hover {
+		cursor: pointer;
+		background-color: #b1b1b1;
+	}
+}
+
+button.menuButton {
+	background-color: #575757;
+	border: none;
+	border-radius: 50%;
+	color: white;
+	padding: 10px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin: 5px;
 	&:hover {
 		cursor: pointer;
 		background-color: #b1b1b1;

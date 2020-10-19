@@ -1,19 +1,40 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap");
-button.accessButton {
-  background-color: #636363;
-  /* Green */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap");
+button:focus {
+  outline: 0;
+}
+
+button.default {
+  background-color: #575757;
   border: none;
-  border-radius: 30px;
+  border-radius: 10%;
   color: white;
-  padding: 15px 32px;
-  margin: 5px;
+  padding: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 20px;
+  margin: 5px;
 }
 
-button.accessButton:hover {
+button.default:hover {
+  cursor: pointer;
+  background-color: #b1b1b1;
+}
+
+button.menuButton {
+  background-color: #575757;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 5px;
+}
+
+button.menuButton:hover {
   cursor: pointer;
   background-color: #b1b1b1;
 }
@@ -102,6 +123,108 @@ li a {
 
 li a:hover {
   background-color: #111;
+}
+
+.form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.form .login-header {
+  margin: 0;
+}
+
+.field {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  border-bottom: 2px dashed #0a0a0a;
+  margin: 4rem auto 1rem;
+  -webkit-transition: 500ms;
+  transition: 500ms;
+}
+
+.field::after {
+  content: '';
+  position: relative;
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #d16dff;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: 0%;
+          transform-origin: 0%;
+  opacity: 0;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  top: 2px;
+}
+
+.field:focus-within .label {
+  -webkit-transform: scale(0.8) translateY(-2rem);
+          transform: scale(0.8) translateY(-2rem);
+  opacity: 1;
+}
+
+.field:focus-within::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  opacity: 1;
+}
+
+.label {
+  color: #0a0a0a;
+  font-size: 1.2rem;
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-transform-origin: 0%;
+          transform-origin: 0%;
+  -webkit-transition: -webkit-transform 400ms;
+  transition: -webkit-transform 400ms;
+  transition: transform 400ms;
+  transition: transform 400ms, -webkit-transform 400ms;
+}
+
+.input {
+  outline: none;
+  border: none;
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  padding: 0.25rem 0;
+  background: none;
+  color: black;
+  font-size: 1.2em;
+  -webkit-transition: border 500ms;
+  transition: border 500ms;
+}
+
+.input:valid {
+  color: yellowgreen;
+}
+
+.input:invalid {
+  color: orangered;
+}
+
+.input:not(:placeholder-shown) ~ .label {
+  -webkit-transform: scale(0.8) translateY(-2rem);
+          transform: scale(0.8) translateY(-2rem);
+  opacity: 1;
 }
 
 body,
