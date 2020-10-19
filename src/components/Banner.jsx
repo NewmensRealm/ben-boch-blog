@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from './Button';
+import '@fortawesome/fontawesome-free/css/all.css';
 import '../styles/styles.css';
 
 export default function Banner() {
@@ -15,10 +16,10 @@ export default function Banner() {
 			<span>B.E.N. Boch</span>
 			<div id="accessMenu">
 				<Link to="/login">
-					<Button title="Log In" />
+					<Button icon="fas fa-sign-in-alt" />
 				</Link>
 				<Link to="/register">
-					<Button title="Register" />
+					<Button icon="fas fa-plus" />
 				</Link>
 			</div>
 		</div>

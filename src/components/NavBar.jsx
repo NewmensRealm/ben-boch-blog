@@ -1,23 +1,22 @@
-import React from "react";
-import "../styles/styles.css";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import '../styles/styles.css';
 
 export default function NavBar() {
 	return (
 		<nav>
 			<ul>
 				<li>
-					<a href='#home' className='active'>
-						Home
-					</a>
+					<NavLink to="/home">Home</NavLink>
 				</li>
 				<li>
-					<a href='#news'>News</a>
+					<NavLink to="/news">News</NavLink>
 				</li>
 				<li>
-					<a href='#contact'>Contact</a>
+					<NavLink to="/contact">Contact</NavLink>
 				</li>
 				<li>
-					<a href='#about'>About</a>
+					<NavLink to="/about">About</NavLink>
 				</li>
 			</ul>
 		</nav>
