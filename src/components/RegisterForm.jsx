@@ -10,10 +10,11 @@ export default function LoginForm() {
 			<Link to="/home">
 				<Button icon="fas fa-arrow-left" />
 			</Link>
-			<div className="form">
+			<div className="form card-form">
 				<h1 className="login-header">Register</h1>
 				<form>
 					<Input type="email" placeholder="Email" />
+					<Input type="text" placeholder="Username" />
 					<Input type="password" placeholder="Password" />
 				</form>
 				<Button title="Register" />
