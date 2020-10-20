@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
-import './styles/styles.css';
 import Banner from './components/Banner';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import News from './components/News';
 import Contact from './components/Contact';
 import About from './components/About';
+import './styles/styles.css';
 
 function App() {
 	return (
