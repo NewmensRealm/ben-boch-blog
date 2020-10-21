@@ -1,20 +1,63 @@
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(3, 150px);
+	grid-template-rows: repeat(3, 150px);
+	//grid-auto-columns: minmax(150px, auto);
+	grid-gap: 10px;
+	margin: 10px;
+	grid-template-areas:
+		"box1 long-hor1 long-hor1"
+		"long-hor2 long-hor2 long-ver"
+		"box2 box3 long-ver";
+	justify-content: center;
+}
 .gallery {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 130px;
-	height: 90px;
-	padding: 10px;
+	border-radius: 30px;
+	//min-width: 130px;
+	//height: auto;
+	padding: 10%;
+
 	background: linear-gradient(
 		135deg,
-		rgba(70, 42, 234, 1) 0%,
-		rgba(230, 0, 246, 0.7779494131077601) 100%
+		rgb(0, 0, 0) 0%,
+		rgba(255, 255, 255, 0.778) 100%
 	);
-	.gal-header {
-		color: white;
-		margin: 0;
-	}
+	transition: background 400ms ease;
+
 	&:hover {
 		cursor: pointer;
+		background: linear-gradient(
+			135deg,
+			rgba(70, 42, 234, 1) 0%,
+			rgba(230, 0, 246, 0.7779494131077601) 100%
+		);
+		transition: background 4000ms ease;
 	}
+}
+.gal-header {
+	color: white;
+	margin: 0;
+}
+
+.box1 {
+	grid-area: box1;
+}
+.box2 {
+	grid-area: box2;
+}
+.box3 {
+	grid-area: box3;
+}
+.long-hor1 {
+	grid-area: long-hor1;
+}
+.long-hor2 {
+	grid-area: long-hor2;
+}
+.long-ver {
+	grid-area: long-ver;
+	writing-mode: vertical-lr;
 }

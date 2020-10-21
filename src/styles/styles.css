@@ -325,6 +325,21 @@ li a:hover {
   transition: all 400ms ease;
 }
 
+.grid-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (150px)[3];
+      grid-template-columns: repeat(3, 150px);
+  -ms-grid-rows: (150px)[3];
+      grid-template-rows: repeat(3, 150px);
+  grid-gap: 10px;
+  margin: 10px;
+      grid-template-areas: "box1 long-hor1 long-hor1" "long-hor2 long-hor2 long-ver" "box2 box3 long-ver";
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .gallery {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -336,19 +351,65 @@ li a:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 130px;
-  height: 90px;
-  padding: 10px;
-  background: linear-gradient(135deg, #462aea 0%, rgba(230, 0, 246, 0.777949) 100%);
-}
-
-.gallery .gal-header {
-  color: white;
-  margin: 0;
+  border-radius: 30px;
+  padding: 10%;
+  background: linear-gradient(135deg, black 0%, rgba(255, 255, 255, 0.778) 100%);
+  -webkit-transition: background 400ms ease;
+  transition: background 400ms ease;
 }
 
 .gallery:hover {
   cursor: pointer;
+  background: linear-gradient(135deg, #462aea 0%, rgba(230, 0, 246, 0.777949) 100%);
+  -webkit-transition: background 4000ms ease;
+  transition: background 4000ms ease;
+}
+
+.gal-header {
+  color: white;
+  margin: 0;
+}
+
+.box1 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: box1;
+}
+
+.box2 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: box2;
+}
+
+.box3 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: box3;
+}
+
+.long-hor1 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-area: long-hor1;
+}
+
+.long-hor2 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: long-hor2;
+}
+
+.long-ver {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 3;
+  grid-area: long-ver;
+  -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
+          writing-mode: vertical-lr;
 }
 
 body,
