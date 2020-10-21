@@ -13,13 +13,16 @@ button.default {
 	display: inline-block;
 	font-size: 20px;
 	margin: 5px;
+	transition: all 400ms ease;
+
 	&:hover {
 		cursor: pointer;
 		background-color: #b1b1b1;
+		transition: all 400ms ease;
 	}
 }
 
-button.menuButton {
+.menuButton {
 	background-color: #575757;
 	border: none;
 	border-radius: 50%;
@@ -30,8 +33,10 @@ button.menuButton {
 	display: inline-block;
 	font-size: 15px;
 	margin: 5px;
+	transition: all 400ms ease;
 	&:hover {
 		cursor: pointer;
 		background-color: #b1b1b1;
+		transition: all 400ms ease;
 	}
 }

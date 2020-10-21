@@ -14,14 +14,18 @@ button.default {
   display: inline-block;
   font-size: 20px;
   margin: 5px;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
 }
 
 button.default:hover {
   cursor: pointer;
   background-color: #b1b1b1;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
 }
 
-button.menuButton {
+.menuButton {
   background-color: #575757;
   border: none;
   border-radius: 50%;
@@ -32,11 +36,15 @@ button.menuButton {
   display: inline-block;
   font-size: 15px;
   margin: 5px;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
 }
 
-button.menuButton:hover {
+.menuButton:hover {
   cursor: pointer;
   background-color: #b1b1b1;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
 }
 
 #banner {
@@ -49,6 +57,7 @@ button.menuButton:hover {
   height: 200px;
   width: 100%;
   background-color: black;
+  position: relative;
 }
 
 #banner span {
@@ -77,13 +86,13 @@ button.menuButton:hover {
   top: 3%;
 }
 
-nav {
+nav.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
 }
 
-nav ul {
+nav.sticky ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -251,7 +260,7 @@ li a:hover {
 .card {
   position: relative;
   width: 90%;
-  height: 300px;
+  height: auto;
   margin: 15px;
   border-radius: 20px;
   -webkit-box-shadow: 5px 5px 10px #b8b7b7;
@@ -262,6 +271,8 @@ li a:hover {
   margin-left: 20px;
   margin-top: 10px;
   margin-bottom: 1px;
+  text-transform: capitalize;
+  overflow: auto;
 }
 
 .card .thumbnail {
@@ -271,10 +282,9 @@ li a:hover {
 }
 
 .post-body {
-  border: 1px solid #a1a1a1;
-  border-radius: 10px;
+  border-top: 1px solid #a1a1a1;
+  border-bottom: 1px solid #a1a1a1;
   min-height: 50px;
-  max-height: 100px;
   padding: 5px;
   margin: 10px;
 }
@@ -290,6 +300,8 @@ li a:hover {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .btn-section .read-more {
@@ -298,10 +310,11 @@ li a:hover {
   color: dodgerblue;
   background-color: transparent;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
   font-size: 16px;
+  -webkit-transition: 400ms ease;
+  transition: 400ms ease;
 }
 
 .btn-section .read-more:hover {
@@ -316,12 +329,10 @@ body,
 html {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
   -ms-overflow-style: none;
   /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
 }
 
 body::-webkit-scrollbar,

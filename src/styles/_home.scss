@@ -10,7 +10,7 @@
 .card {
 	position: relative;
 	width: 90%;
-	height: 300px;
+	height: auto;
 	margin: 15px;
 	//padding-left: 10px;
 	border-radius: 20px;
@@ -20,6 +20,8 @@
 		margin-left: 20px;
 		margin-top: 10px;
 		margin-bottom: 1px;
+		text-transform: capitalize;
+		overflow: auto;
 	}
 	.thumbnail {
 		width: 100%;
@@ -29,10 +31,10 @@
 }
 .post-body {
 	//background-color: yellowgreen;
-	border: 1px solid rgb(161, 161, 161);
-	border-radius: 10px;
+	border-top: 1px solid rgb(161, 161, 161);
+	border-bottom: 1px solid rgb(161, 161, 161);
 	min-height: 50px;
-	max-height: 100px;
+	//max-height: 100px;
 	padding: 5px;
 	margin: 10px;
 }
@@ -44,16 +46,19 @@
 	display: flex;
 	//background-color: purple;
 	justify-content: flex-end;
+	position: relative;
+	margin-bottom: 10px;
 	.read-more {
 		margin-right: 20px;
 		border: none;
 		color: dodgerblue;
 		background-color: transparent;
 		text-decoration: underline;
-		text-decoration-thickness: 1px;
-		font-family: 'Roboto', sans-serif;
+		//text-decoration-thickness: 1px;
+		font-family: "Roboto", sans-serif;
 		font-weight: 300;
 		font-size: 16px;
+		transition: 400ms ease;
 		&:hover {
 			color: rgb(0, 91, 182);
 			font-size: 18px;
