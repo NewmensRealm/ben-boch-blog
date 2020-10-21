@@ -1,0 +1,20 @@
+.gallery {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 130px;
+	height: 90px;
+	padding: 10px;
+	background: linear-gradient(
+		135deg,
+		rgba(70, 42, 234, 1) 0%,
+		rgba(230, 0, 246, 0.7779494131077601) 100%
+	);
+	.gal-header {
+		color: white;
+		margin: 0;
+	}
+	&:hover {
+		cursor: pointer;
+	}
+}
