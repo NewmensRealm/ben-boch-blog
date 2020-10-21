@@ -354,15 +354,11 @@ li a:hover {
   border-radius: 30px;
   padding: 10%;
   background: linear-gradient(135deg, black 0%, rgba(255, 255, 255, 0.778) 100%);
-  -webkit-transition: background 400ms ease;
-  transition: background 400ms ease;
 }
 
 .gallery:hover {
   cursor: pointer;
   background: linear-gradient(135deg, #462aea 0%, rgba(230, 0, 246, 0.777949) 100%);
-  -webkit-transition: background 4000ms ease;
-  transition: background 4000ms ease;
 }
 
 .gal-header {

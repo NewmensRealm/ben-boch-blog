@@ -10,6 +10,7 @@
 		"long-hor2 long-hor2 long-ver"
 		"box2 box3 long-ver";
 	justify-content: center;
+	//background-color: pink;
 }
 .gallery {
 	display: flex;
@@ -25,7 +26,7 @@
 		rgb(0, 0, 0) 0%,
 		rgba(255, 255, 255, 0.778) 100%
 	);
-	transition: background 400ms ease;
+	//transition: background 400ms linear;
 
 	&:hover {
 		cursor: pointer;
@@ -34,7 +35,7 @@
 			rgba(70, 42, 234, 1) 0%,
 			rgba(230, 0, 246, 0.7779494131077601) 100%
 		);
-		transition: background 4000ms ease;
+		//transition: background 4000ms linear;
 	}
 }
 .gal-header {
