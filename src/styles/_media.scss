@@ -1,0 +1,25 @@
+@media all and(max-width: 400px) {
+	#banner {
+		height: 100px;
+		span {
+			margin-left: 20px;
+		}
+	}
+	#bannerImg {
+		display: none;
+	}
+	#accessMenu {
+		flex-direction: column;
+	}
+	.home {
+		left: 5%;
+		right: 5%;
+	}
+	.grid-container {
+		display: flex;
+		flex-direction: column;
+	}
+	.long-ver {
+		writing-mode: horizontal-tb;
+	}
+}
