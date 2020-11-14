@@ -20,6 +20,9 @@ export default function Banner() {
 				<Link to="/register" className="menuButton">
 					<i className="fas fa-plus" />
 				</Link>
+				<Link to="/profile" className="menuButton">
+					<i className="fas fa-user-alt" />
+				</Link>
 			</div>
 		</div>
 	);

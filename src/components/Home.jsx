@@ -21,7 +21,6 @@ export default function Home() {
 				<Card
 					key={post._id}
 					title={post.title}
-					img={post.img}
 					description={post.description}
 				/>
 			))}

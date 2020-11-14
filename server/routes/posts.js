@@ -1,6 +1,20 @@
 import express from 'express';
 import { Post, validatePost } from '../models/post';
 import { User } from '../models/user';
+import multer from 'multer';
+
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, './uploads/');
+	},
+	filename: function (req, file, cb) {
+		const now = new Date().toISOString();
+		const date = now.replace(/:/g, '-');
+		cb(null, date + file.originalname);
+	},
+});
+
+const uploads = multer({ storage: storage });
 
 const router = express.Router();
 
@@ -15,30 +29,37 @@ router.get('/:id', async (req, res) => {
 	res.send(post);
 });
 
-router.post('/', async (req, res) => {
-	const { error } = validatePost(req.body);
-	if (error) return res.status(400).send(error.details[0].message);
+router.post(
+	'/',
+	uploads.fields([
+		{ name: 'thumbnailImg', maxCount: 1 },
+		{ name: 'pdfDoc', maxCount: 1 },
+	]),
+	async (req, res) => {
+		const { error } = validatePost(req.body);
+		if (error) return res.status(400).send(error.details[0].message);
 
-	const user = await User.findById(req.body.userId);
-	if (!user) return res.status(400).send('Invalid user...');
+		const user = await User.findById(req.body.userId);
+		if (!user) return res.status(400).send('Invalid user...');
 
-	const post = new Post({
-		author: {
-			_id: user._id,
-			name: user.name,
-			rank: user.rank,
-		},
-		title: req.body.title,
-		thumbnailImagePath: req.body.thumbnailImage,
-		pdfPath: req.body.pdfPath,
-		description: req.body.description,
-		//date: Date.now,
-	});
+		const post = new Post({
+			author: {
+				_id: user._id,
+				name: user.name,
+				rank: user.rank,
+			},
+			title: req.body.title,
+			thumbnailImgPath: req.files['thumbnailImg'][0].path,
+			pdfDocPath: req.files['pdfDoc'][0].path,
+			description: req.body.description,
+			//date: Date.now,
+		});
 
-	await post.save();
+		await post.save();
 
-	res.send(post);
-});
+		res.send(post);
+	}
+);
 
 router.put('/:id', async (req, res) => {
 	const { error } = validatePost(req.body);

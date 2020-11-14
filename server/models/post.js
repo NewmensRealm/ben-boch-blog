@@ -19,7 +19,7 @@ export const postSchema = new Schema({
 		require: true,
 	},
 	thumbnailImgPath: String,
-	pdfPath: { type: String },
+	pdfDocPath: { type: String },
 	description: {
 		type: String,
 		required: true,
@@ -36,7 +36,7 @@ export function validatePost(post) {
 		userId: Joi.objectId().required(),
 		title: Joi.string().required().min(5).max(50),
 		thumbnailImgPath: Joi.string(),
-		pdfPath: Joi.string(),
+		pdfDocPath: Joi.string(),
 		description: Joi.string().required().min(10).max(255),
 		date: Joi.date(),
 	});
