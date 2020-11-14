@@ -1,0 +1,26 @@
+{
+	"name": "ben-boch-blog",
+	"version": "1.0.0",
+	"description": "api router for ben boch blog",
+	"main": "index.js",
+	"scripts": {
+		"test": "test",
+		"start": "node -r esm index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "blog-api"
+	},
+	"author": "NewmensRealm",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"config": "^3.3.2",
+		"esm": "^3.2.25",
+		"express": "^4.17.1",
+		"joi": "^17.3.0",
+		"joi-oid": "^1.1.2",
+		"lodash": "^4.17.20",
+		"mongoose": "^5.10.13"
+	}
+}
