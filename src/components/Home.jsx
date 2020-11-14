@@ -1,44 +1,28 @@
-import React, { useState, useEffect } from "react";
-import Card from "./Card";
-
-const postList = [
-	{
-		id: 1,
-		title: "Text about nothing!",
-		img: "https://picsum.photos/200/300",
-		text:
-			"A text portion A text portionA text portioA text portioA text portiA text portioA text poA text portioA text portioA text portioA text portioA text portioA text portioA text portiortioA text portioA text portioA text portioA text portiooA text portioA text portioA text portioA text portioA text portioA text portio",
-	},
-	{
-		id: 2,
-		title: "Another Post",
-		img: "https://picsum.photos/200/300",
-		text: "A text portion",
-	},
-
-	{
-		id: 3,
-		title: "New Post",
-		img: "https://picsum.photos/200/300",
-		text: "A text portion",
-	},
-];
+import React, { useState, useEffect } from 'react';
+import Card from './Card';
+import { getPosts } from '../services/postService';
 
 export default function Home() {
-	const [posts, setPosts] = useState(postList);
+	const [posts, setPosts] = useState([]);
+
+	const fetchData = async () => {
+		const { data: posts } = await getPosts();
+		//console.log(posts);
+		setPosts((prevPosts) => posts);
+	};
 
 	useEffect(() => {
-		setPosts((prevPosts) => postList);
+		fetchData();
 	}, [posts]);
 
 	return (
-		<div className='home'>
+		<div className="home">
 			{posts.map((post) => (
 				<Card
-					key={post.id}
+					key={post._id}
 					title={post.title}
 					img={post.img}
-					text={post.text}
+					description={post.description}
 				/>
 			))}
 		</div>
