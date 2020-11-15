@@ -7,13 +7,14 @@ export default function Home() {
 
 	const fetchData = async () => {
 		const { data: posts } = await getPosts();
-		//console.log(posts);
+		console.log(posts);
+
 		setPosts((prevPosts) => posts);
 	};
 
 	useEffect(() => {
 		fetchData();
-	}, [posts]);
+	}, []);
 
 	return (
 		<div className="home">

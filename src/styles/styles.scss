@@ -7,6 +7,7 @@
 @import './gallery';
 @import './transitions';
 @import './intro';
+@import './profile';
 
 body,
 html {
@@ -20,6 +21,15 @@ html {
 	&::-webkit-scrollbar {
 		display: none;
 	}
+}
+
+.container {
+	//display: flex;
+	position: absolute;
+	align-items: center;
+	justify-content: center;
+	left: 30%;
+	right: 30%;
 }
 
 @import './media';

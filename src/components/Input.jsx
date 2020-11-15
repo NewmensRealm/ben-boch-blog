@@ -1,9 +1,16 @@
 import React from 'react';
 
-export default function Input({ type, placeholder }) {
+export default function Input({ type, placeholder, onChange }) {
 	return (
 		<div className="field">
-			<input type={type} name={type} className="input" placeholder=" " />
+			<input
+				style={type === 'file' ? { display: 'none' } : {}}
+				type={type}
+				name={type}
+				className="input"
+				placeholder=" "
+				onChange={onChange}
+			/>
 			<label htmlFor={type} className="label">
 				{placeholder}
 			</label>
