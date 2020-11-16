@@ -1,4 +1,5 @@
 import express from 'express';
+import fs from 'fs';
 import { Post, validatePost } from '../models/post';
 import { User } from '../models/user';
 import multer from 'multer';
@@ -49,8 +50,8 @@ router.post(
 				rank: user.rank,
 			},
 			title: req.body.title,
-			thumbnailImgPath: req.files['thumbnailImg'][0].path,
-			pdfDocPath: req.files['pdfDoc'][0].path,
+			//thumbnailImgPath: req.files['thumbnailImg'][0].path,
+			//pdfDocPath: req.files['pdfDoc'][0].path,
 			description: req.body.description,
 			//date: Date.now,
 		});
@@ -93,8 +94,16 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-	const post = await Post.findByIdAndRemove(req.params.id);
+	//const post = await Post.findByIdAndRemove(req.params.id);
+	const post = await Post.findById(req.params.id);
 	if (!post) return res.status(400).send('Post does not exists...');
+	try {
+		fs.unlinkSync(post.thumbnailImgPath);
+		console.log('successfully deleted img');
+	} catch (err) {
+		console.log('Error occured');
+	}
+	await Post.findByIdAndDelete(req.params.id);
 	res.send(post);
 });
 

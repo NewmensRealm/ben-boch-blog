@@ -58,6 +58,11 @@ $text-color: #0a0a0a;
 	transform-origin: 0%;
 	transition: transform 400ms;
 }
+.input-icon {
+	position: absolute;
+	right: 0;
+	transform: translate(100%, -100%);
+}
 .input {
 	outline: none;
 	border: none;

@@ -8,3 +8,7 @@ export function getPosts() {
 export function publishPost(post) {
 	return http.post(`${apiEndpoint}/posts`, post);
 }
+
+export function deletePost(postId) {
+	return http.delete(`${apiEndpoint}/posts/${postId}`);
+}

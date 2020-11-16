@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function Card({ title, description, img }) {
+export default function Card({
+	title,
+	description,
+	img,
+	onClickDelete,
+	onClickRead,
+}) {
 	return (
 		<div className="card">
 			<h2 className="post-header">{title}</h2>
@@ -11,7 +17,12 @@ export default function Card({ title, description, img }) {
 				<p className="text">{description}</p>
 			</div>
 			<div className="btn-section">
-				<button className="read-more">Read More</button>
+				<button className="delete" onClick={onClickDelete}>
+					Delete
+				</button>
+				<button className="read-more" onClick={onClickRead}>
+					Read More
+				</button>
 			</div>
 		</div>
 	);
