@@ -42,3 +42,14 @@ export function validatePost(post) {
 	});
 	return schema.validate(post);
 }
+
+export function validateUpdatedPost(post) {
+	const schema = Joi.object({
+		title: Joi.string().required().min(5).max(50),
+		thumbnailImgPath: Joi.string(),
+		pdfDocPath: Joi.string(),
+		description: Joi.string().required().min(10).max(255),
+		date: Joi.date(),
+	});
+	return schema.validate(post);
+}

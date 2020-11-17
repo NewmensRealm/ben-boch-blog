@@ -11,9 +11,19 @@ export default function Home() {
 		setPosts([...posts]);
 	};
 
-	const handleUpdatePost = async (postId) => {
-		console.log('clicked');
-		//await updatePost(postId);
+	const handleUpdatePost = async (data, postId) => {
+		const fd = new FormData();
+		fd.append('title', data.newTitle);
+		fd.append('thumbnailImg', data.newImg, data.newImg.name);
+		fd.append('pdfDoc', data.newPdf, data.newPdf.name);
+		fd.append('description', data.newDescription);
+
+		try {
+			const res = await updatePost(postId, fd);
+			console.log(res);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const handleDelete = async (postId) => {
@@ -29,7 +39,11 @@ export default function Home() {
 			setPosts([...originalPosts]);
 		}
 	};
-	console.log('render');
+
+	const handleReadPost = (childData, postId) => {
+		console.log(childData, postId);
+	};
+
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -43,8 +57,13 @@ export default function Home() {
 					img={post.thumbnailImgPath}
 					pdf={post.pdfDocPath}
 					description={post.description}
-					onClickUpdate={() => handleUpdatePost(post._id)}
+					onClickUpdate={(childData) =>
+						handleUpdatePost(childData, post._id)
+					}
 					onClickDelete={() => handleDelete(post._id)}
+					onClickRead={(childData) =>
+						handleReadPost(childData, post._id)
+					}
 				/>
 			))}
 		</div>

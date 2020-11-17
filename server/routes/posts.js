@@ -1,6 +1,6 @@
 import express from 'express';
 import fs from 'fs';
-import { Post, validatePost } from '../models/post';
+import { Post, validatePost, validateUpdatedPost } from '../models/post';
 import { User } from '../models/user';
 import multer from 'multer';
 
@@ -62,13 +62,23 @@ router.post(
 	}
 );
 
-router.put('/:id', async (req, res) => {
-	const { error } = validatePost(req.body);
-	if (error) return res.status(400).send(error.details[0].message);
+router.put(
+	'/:id',
+	uploads.fields([
+		{ name: 'thumbnailImg', maxCount: 1 },
+		{ name: 'pdfDoc', maxCount: 1 },
+	]),
+	async (req, res) => {
+		console.log(req.body);
+		console.log(req.files['thumbnailImg'][0].path);
+		console.log(req.files['pdfDoc'][0].path);
 
-	const user = await User.findById(req.body.userId);
-	if (!user) return res.status(400).send('Invalid user...');
+		const { error } = validateUpdatedPost(req.body);
+		if (error) return res.status(400).send(error.details[0].message);
 
+		const post = await Post.findById(req.params.id);
+		if (!post) return res.status(400).send('Invalid post...');
+		/*
 	const post = await Post.findByIdAndUpdate(
 		req.params.id,
 		{
@@ -90,8 +100,9 @@ router.put('/:id', async (req, res) => {
 
 	if (!post) return res.status(400).send('Invalid input...');
 
-	res.send(post);
-});
+	res.send(post);*/
+	}
+);
 
 router.delete('/:id', async (req, res) => {
 	//const post = await Post.findByIdAndRemove(req.params.id);
