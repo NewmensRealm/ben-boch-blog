@@ -50,8 +50,8 @@ router.post(
 				rank: user.rank,
 			},
 			title: req.body.title,
-			//thumbnailImgPath: req.files['thumbnailImg'][0].path,
-			//pdfDocPath: req.files['pdfDoc'][0].path,
+			thumbnailImgPath: req.files['thumbnailImg'][0].path,
+			pdfDocPath: req.files['pdfDoc'][0].path,
 			description: req.body.description,
 			//date: Date.now,
 		});
@@ -99,7 +99,9 @@ router.delete('/:id', async (req, res) => {
 	if (!post) return res.status(400).send('Post does not exists...');
 	try {
 		fs.unlinkSync(post.thumbnailImgPath);
-		console.log('successfully deleted img');
+		fs.unlinkSync(post.pdfDocPath);
+
+		console.log('successfully deleted resources');
 	} catch (err) {
 		console.log('Error occured');
 	}

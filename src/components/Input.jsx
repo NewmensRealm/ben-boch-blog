@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Button from './Button';
 
-export default function Input({ type, placeholder, onChange, icon }) {
+export default function Input({ accept, type, placeholder, onChange, icon }) {
 	const fileInput = useRef();
 
 	const handleFilePick = () => {
@@ -12,12 +12,12 @@ export default function Input({ type, placeholder, onChange, icon }) {
 		<div className="field">
 			<input
 				ref={fileInput}
-				style={null /*type === 'file' ? { display: 'none' } : {}*/}
 				type={type}
 				name={type}
 				className="input"
 				placeholder=" "
 				onChange={onChange}
+				accept={accept}
 			/>
 			<label htmlFor={type} className="label">
 				{placeholder}

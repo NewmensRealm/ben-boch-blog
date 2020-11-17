@@ -13,9 +13,10 @@ export default function Profile() {
 		const fd = new FormData();
 		fd.append('userId', '5faf90b66aad8807403be61a');
 		fd.append('title', title);
-		//fd.append('thumbnailImg', imgFile, imgFile.name);
-		//fd.append('pdfDoc', pdfDoc, pdfDoc.name);
+		fd.append('thumbnailImg', imgFile, imgFile.name);
+		fd.append('pdfDoc', pdfDoc, pdfDoc.name);
 		fd.append('description', description);
+
 		try {
 			const res = await publishPost(fd);
 			console.log(res);
@@ -56,6 +57,7 @@ export default function Profile() {
 						<Input
 							type="file"
 							placeholder="Select thumbnail"
+							accept="image/*"
 							icon="fas fa-file-image"
 							onChange={(event) =>
 								setImgFile(event.target.files[0])
@@ -64,6 +66,7 @@ export default function Profile() {
 						<Input
 							type="file"
 							placeholder="Select document"
+							accept="application/pdf"
 							icon="fas fa-file-pdf"
 							onChange={(event) =>
 								setPdfDoc(event.target.files[0])

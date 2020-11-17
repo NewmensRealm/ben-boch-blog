@@ -287,7 +287,6 @@ li a:hover {
 
 .card .thumbnail {
   width: 100%;
-  height: 80px;
   margin: 0;
 }
 
@@ -350,6 +349,27 @@ li a:hover {
 
 .btn-section .delete:hover {
   color: #b60000;
+  font-size: 18px;
+  font-weight: 500;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.btn-section .modify {
+  margin-right: 20px;
+  border: none;
+  color: #35aa53;
+  background-color: transparent;
+  text-decoration: underline;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  -webkit-transition: 400ms ease;
+  transition: 400ms ease;
+}
+
+.btn-section .modify:hover {
+  color: #048804;
   font-size: 18px;
   font-weight: 500;
   -webkit-transition: all 400ms ease;

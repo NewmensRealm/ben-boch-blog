@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
-import { getPosts, deletePost } from '../services/postService';
+import { getPosts, deletePost, updatePost } from '../services/postService';
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
@@ -9,6 +9,11 @@ export default function Home() {
 		const { data: posts } = await getPosts();
 
 		setPosts([...posts]);
+	};
+
+	const handleUpdatePost = async (postId) => {
+		console.log('clicked');
+		//await updatePost(postId);
 	};
 
 	const handleDelete = async (postId) => {
@@ -24,7 +29,7 @@ export default function Home() {
 			setPosts([...originalPosts]);
 		}
 	};
-
+	console.log('render');
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -35,7 +40,10 @@ export default function Home() {
 				<Card
 					key={post._id}
 					title={post.title}
+					img={post.thumbnailImgPath}
+					pdf={post.pdfDocPath}
 					description={post.description}
+					onClickUpdate={() => handleUpdatePost(post._id)}
 					onClickDelete={() => handleDelete(post._id)}
 				/>
 			))}

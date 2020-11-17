@@ -12,3 +12,7 @@ export function publishPost(post) {
 export function deletePost(postId) {
 	return http.delete(`${apiEndpoint}/posts/${postId}`);
 }
+
+export function updatePost(postId) {
+	return http.put(`${apiEndpoint}/posts/postId`);
+}
