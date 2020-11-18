@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
 import Button from './Button';
+import Input from "./input/Input";
+import InputForm from './input/InputForm';
+import FileInput from './input/FileInput';
 
 export default function Card({
 	title,
@@ -17,7 +20,9 @@ export default function Card({
 	const newDescriptionRef = useRef();
 
 	const updatePost = () => {
-		onClickUpdate({
+		onClickUpdate(
+			
+			{
 			newTitle: newTitleRef.current.value,
 			newImg: newImgRef.current.files[0],
 			newPdf: newPdfRef.current.files[0],
@@ -46,28 +51,30 @@ export default function Card({
 				<p className="text">{description}</p>
 			</div>
 			{modifyMod && (
-				<div className="modify-section">
-					<input
-						ref={newTitleRef}
+				<InputForm>
+					<Input
+						refer={newTitleRef}
 						type="text"
 						placeholder="New Title"
-					/>
-					<input ref={newImgRef} type="file" accept="image/*" />
-					<input
-						ref={newPdfRef}
-						type="file"
+						/>
+					<FileInput refer={newImgRef} icon='fas fa-file-image' accept="image/*" placeholder="New image" />
+					<FileInput
+						refer={newPdfRef}
+						icon='fas fa-file-pdf'
 						accept="application/pdf"
-					/>
-					<input
-						ref={newDescriptionRef}
+						placeholder='New PDF'
+						/>
+					<Input
+						refer={newDescriptionRef}
 						type="text"
 						placeholder="New Description"
-					/>
+						/>
 					<Button
 						icon="fas fa-cloud-upload-alt"
 						onClick={updatePost}
-					/>
-				</div>
+						/>
+				</InputForm>
+				
 			)}
 			<div className="btn-section">
 				<button

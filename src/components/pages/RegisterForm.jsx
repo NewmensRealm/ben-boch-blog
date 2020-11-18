@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../Input';
+import FancyInput from '../input/FancyInput';
 import Button from '../Button';
 import '@fortawesome/fontawesome-free/css/all.css';
 
@@ -13,9 +13,9 @@ export default function LoginForm() {
 			<div className="form card-form">
 				<h1 className="login-header">Register</h1>
 				<form>
-					<Input type="email" placeholder="Email" />
-					<Input type="text" placeholder="Username" />
-					<Input type="password" placeholder="Password" />
+					<FancyInput type="email" placeholder="Email" />
+					<FancyInput type="text" placeholder="Username" />
+					<FancyInput type="password" placeholder="Password" />
 				</form>
 				<Button title="Register" />
 			</div>

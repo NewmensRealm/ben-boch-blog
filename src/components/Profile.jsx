@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from './Input';
+import FancyInput from './input/FancyInput';
 import Button from './Button';
 import { publishPost } from '../services/postService';
 
@@ -11,7 +11,7 @@ export default function Profile() {
 
 	const handlePublisher = async () => {
 		const fd = new FormData();
-		fd.append('userId', '5faf90b66aad8807403be61a');
+		fd.append('userId', '5faea26d74db530a30877b0f');
 		fd.append('title', title);
 		fd.append('thumbnailImg', imgFile, imgFile.name);
 		fd.append('pdfDoc', pdfDoc, pdfDoc.name);
@@ -49,22 +49,25 @@ export default function Profile() {
 				<div className="form">
 					<h1 className="login-header">Post</h1>
 					<form>
-						<Input
+						<FancyInput
 							type="text"
 							placeholder="Title"
+							name='title'
 							onChange={(event) => setTitle(event.target.value)}
 						/>
-						<Input
+						<FancyInput
 							type="file"
 							placeholder="Select thumbnail"
+							name='thumbnailImg'
 							accept="image/*"
 							icon="fas fa-file-image"
 							onChange={(event) =>
 								setImgFile(event.target.files[0])
 							}
 						/>
-						<Input
+						<FancyInput
 							type="file"
+							name='pdfDoc'
 							placeholder="Select document"
 							accept="application/pdf"
 							icon="fas fa-file-pdf"
@@ -72,9 +75,10 @@ export default function Profile() {
 								setPdfDoc(event.target.files[0])
 							}
 						/>
-						<Input
+						<FancyInput
 							type="text"
 							placeholder="Description"
+							name='description'
 							onChange={(event) =>
 								setDescription(event.target.value)
 							}

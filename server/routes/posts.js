@@ -57,7 +57,6 @@ router.post(
 		});
 
 		await post.save();
-
 		res.send(post);
 	}
 );
@@ -69,38 +68,32 @@ router.put(
 		{ name: 'pdfDoc', maxCount: 1 },
 	]),
 	async (req, res) => {
-		console.log(req.body);
-		console.log(req.files['thumbnailImg'][0].path);
-		console.log(req.files['pdfDoc'][0].path);
-
 		const { error } = validateUpdatedPost(req.body);
 		if (error) return res.status(400).send(error.details[0].message);
 
 		const post = await Post.findById(req.params.id);
 		if (!post) return res.status(400).send('Invalid post...');
-		/*
-	const post = await Post.findByIdAndUpdate(
+		
+		fs.unlinkSync(post.thumbnailImgPath)
+		fs.unlinkSync(post.pdfDocPath)
+
+		const updatedPost = await Post.findByIdAndUpdate(
 		req.params.id,
 		{
 			$set: {
-				author: {
-					_id: user._id,
-					name: user.name,
-					email: user.email,
-					rank: user.rank,
-				},
-				thumbnailImagePath: req.body.thumbnailImage,
-				pdfPath: req.body.pdfPath,
+				title:req.body.title,
+				thumbnailImgPath: req.files['thumbnailImg'][0].path,
+				pdfDocPath:req.files['pdfDoc'][0].path,
 				description: req.body.description,
-				date: Date.now,
+				//date: Date.now,
 			},
 		},
 		{ new: true }
 	);
 
-	if (!post) return res.status(400).send('Invalid input...');
+	if (!updatedPost) return res.status(400).send('Invalid input...');
 
-	res.send(post);*/
+	res.send(updatedPost);
 	}
 );
 

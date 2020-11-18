@@ -12,11 +12,13 @@ export default function Home() {
 	};
 
 	const handleUpdatePost = async (data, postId) => {
+		const {newTitle, newImg, newPdf, newDescription}=data
+		
 		const fd = new FormData();
-		fd.append('title', data.newTitle);
-		fd.append('thumbnailImg', data.newImg, data.newImg.name);
-		fd.append('pdfDoc', data.newPdf, data.newPdf.name);
-		fd.append('description', data.newDescription);
+		fd.append('title', newTitle);
+		fd.append('thumbnailImg', newImg, newImg.name);
+		fd.append('pdfDoc', newPdf, newPdf.name);
+		fd.append('description', newDescription);
 
 		try {
 			const res = await updatePost(postId, fd);
