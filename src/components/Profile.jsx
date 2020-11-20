@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Joi from 'joi-browser';
 import FancyInput from './input/FancyInput';
 import Button from './Button';
 import { publishPost } from '../services/postService';
@@ -8,10 +9,44 @@ export default function Profile() {
 	const [imgFile, setImgFile] = useState('');
 	const [pdfDoc, setPdfDoc] = useState('');
 	const [description, setDescription] = useState('');
+	//const [error, setError] = useState({});
+
+	const schema = {
+		title: Joi.string().trim().min(5).max(50).required().label('Title'),
+		imgFile: Joi.object().required().label('Thumbnail Image'),
+		pdfDoc: Joi.object().required().label('PDF'),
+		description: Joi.string()
+			.trim()
+			.min(10)
+			.max(255)
+			.required()
+			.label('Description'),
+	};
+
+	const validate = () => {
+		const options = { abortEarly: false };
+		const { error } = Joi.validate(
+			{ title, imgFile, pdfDoc, description },
+			schema,
+			options
+		);
+
+		if (!error) return null;
+
+		const errors = {};
+		for (let item of error.details) {
+			errors[item.path[0]] = item.message;
+		}
+		return errors;
+	};
 
 	const handlePublisher = async () => {
+		const result = validate();
+		console.log(result);
+		if (result) return null;
+
 		const fd = new FormData();
-		fd.append('userId', '5faea26d74db530a30877b0f');
+		fd.append('userId', '5faf90b66aad8807403be61a');
 		fd.append('title', title);
 		fd.append('thumbnailImg', imgFile, imgFile.name);
 		fd.append('pdfDoc', pdfDoc, pdfDoc.name);
@@ -52,13 +87,13 @@ export default function Profile() {
 						<FancyInput
 							type="text"
 							placeholder="Title"
-							name='title'
+							name="title"
 							onChange={(event) => setTitle(event.target.value)}
 						/>
 						<FancyInput
 							type="file"
 							placeholder="Select thumbnail"
-							name='thumbnailImg'
+							name="thumbnailImg"
 							accept="image/*"
 							icon="fas fa-file-image"
 							onChange={(event) =>
@@ -67,7 +102,7 @@ export default function Profile() {
 						/>
 						<FancyInput
 							type="file"
-							name='pdfDoc'
+							name="pdfDoc"
 							placeholder="Select document"
 							accept="application/pdf"
 							icon="fas fa-file-pdf"
@@ -78,7 +113,7 @@ export default function Profile() {
 						<FancyInput
 							type="text"
 							placeholder="Description"
-							name='description'
+							name="description"
 							onChange={(event) =>
 								setDescription(event.target.value)
 							}

@@ -12,12 +12,12 @@ export default function Home() {
 	};
 
 	const handleUpdatePost = async (data, postId) => {
-		const {newTitle, newImg, newPdf, newDescription}=data
-		
+		const { newTitle, newImgFile, newPdfDoc, newDescription } = data;
+
 		const fd = new FormData();
 		fd.append('title', newTitle);
-		fd.append('thumbnailImg', newImg, newImg.name);
-		fd.append('pdfDoc', newPdf, newPdf.name);
+		fd.append('thumbnailImg', newImgFile, newImgFile.name);
+		fd.append('pdfDoc', newPdfDoc, newPdfDoc.name);
 		fd.append('description', newDescription);
 
 		try {
@@ -32,13 +32,13 @@ export default function Home() {
 		const originalPosts = posts;
 
 		const updatedPosts = originalPosts.filter((p) => p._id !== postId);
-		setPosts([...updatedPosts]);
+		setPosts((prevPosts) => updatedPosts);
 		try {
 			await deletePost(postId);
 		} catch (error) {
 			if (error.response && error.response.status === 404)
 				console.log('This movie has already been deleted.');
-			setPosts([...originalPosts]);
+			setPosts((prevPosts) => originalPosts);
 		}
 	};
 

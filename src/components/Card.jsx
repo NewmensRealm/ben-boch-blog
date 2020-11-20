@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
-import Input from "./input/Input";
+import Input from './input/Input';
 import InputForm from './input/InputForm';
 import FileInput from './input/FileInput';
+import Joi from 'joi-browser';
 
 export default function Card({
 	title,
@@ -14,20 +15,50 @@ export default function Card({
 	onClickRead,
 }) {
 	const [modifyMod, setModifyMod] = useState(false);
-	const newTitleRef = useRef();
-	const newImgRef = useRef();
-	const newPdfRef = useRef();
-	const newDescriptionRef = useRef();
+	const [newTitle, setNewTitle] = useState('');
+	const [newImgFile, setNewImgFile] = useState();
+	const [newPdfDoc, setNewPdfDoc] = useState();
+	const [newDescription, setNewDescription] = useState();
+
+	const data = {
+		newTitle,
+		newImgFile,
+		newPdfDoc,
+		newDescription,
+	};
+
+	const schema = {
+		newTitle: Joi.string().trim().min(5).max(50).required().label('Title'),
+		newImgFile: Joi.object().required().label('Thumbnail Image'),
+		newPdfDoc: Joi.object().required().label('PDF'),
+		newDescription: Joi.string()
+			.trim()
+			.min(10)
+			.max(255)
+			.required()
+			.label('Description'),
+	};
+
+	const validate = () => {
+		const options = { abortEarly: false };
+		const { error } = Joi.validate(data, schema, options);
+
+		if (!error) return null;
+
+		const errors = {};
+		for (let item of error.details) {
+			errors[item.path[0]] = item.message;
+		}
+		return errors;
+	};
 
 	const updatePost = () => {
-		onClickUpdate(
-			
-			{
-			newTitle: newTitleRef.current.value,
-			newImg: newImgRef.current.files[0],
-			newPdf: newPdfRef.current.files[0],
-			newDescription: newDescriptionRef.current.value,
-		});
+		const result = validate();
+		console.log(result);
+
+		if (result) return null;
+		console.log(data);
+		onClickUpdate(data);
 	};
 
 	const readPost = () => {
@@ -53,28 +84,38 @@ export default function Card({
 			{modifyMod && (
 				<InputForm>
 					<Input
-						refer={newTitleRef}
 						type="text"
 						placeholder="New Title"
-						/>
-					<FileInput refer={newImgRef} icon='fas fa-file-image' accept="image/*" placeholder="New image" />
+						onChange={(event) => setNewTitle(event.target.value)}
+					/>
 					<FileInput
-						refer={newPdfRef}
-						icon='fas fa-file-pdf'
+						icon="fas fa-file-image"
+						accept="image/jpeg,image/png"
+						placeholder="New image"
+						onChange={(event) =>
+							setNewImgFile(event.target.files[0])
+						}
+					/>
+					<FileInput
+						icon="fas fa-file-pdf"
 						accept="application/pdf"
-						placeholder='New PDF'
-						/>
+						placeholder="New PDF"
+						onChange={(event) =>
+							setNewPdfDoc(event.target.files[0])
+						}
+					/>
 					<Input
-						refer={newDescriptionRef}
 						type="text"
 						placeholder="New Description"
-						/>
+						onChange={(event) =>
+							setNewDescription(event.target.value)
+						}
+					/>
 					<Button
 						icon="fas fa-cloud-upload-alt"
 						onClick={updatePost}
-						/>
+					/>
 				</InputForm>
-				
 			)}
 			<div className="btn-section">
 				<button
