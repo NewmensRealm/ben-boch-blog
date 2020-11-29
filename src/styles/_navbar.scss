@@ -1,40 +1,41 @@
-nav.sticky {
+.sidebar-container {
+	display: flex;
+	flex-direction: column;
 	position: sticky;
-	top: 0;
-	ul {
-		display: flex;
-		justify-content: center;
-		align-self: flex-start;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		background-color: #333;
-		width: 100%;
-	}
-}
-
-.active {
-	background-color: silver;
-	color: black;
-	font-family: "Roboto", sans-serif;
-	font-weight: 500;
-	&:hover {
-		background-color: #111;
-		color: white;
-	}
-}
-
-li {
-	a {
-		display: block;
-		color: white;
-		text-align: center;
-		padding: 14px 16px;
-		text-decoration: none;
-		font-family: "Roboto", sans-serif;
-		font-weight: 100;
-		&:hover {
-			background-color: #111;
+	top: 0px;
+	background-color: #575757;
+	min-height: 100vh;
+	.navbar {
+		position: relative;
+		ul {
+			list-style-type: none;
+			padding: 0;
+		}
+		.nav-item {
+			position: relative;
+			border: none;
+			border-radius: 10px;
+			height: 50px;
+			background-color: #575757;
+			text-align: center;
+			margin-left: 10px;
+			margin-right: 10px;
+			margin-bottom: 5px;
+			transition: background-color 400ms ease;
+			&:hover {
+				background-color: rgb(116, 114, 114);
+				transition: all 400ms ease;
+			}
+			.nav-text {
+				position: absolute;
+				left: 10%;
+				top: 50%;
+				transform: translateY(-50%);
+				color: white;
+				text-decoration: none;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 500;
+			}
 		}
 	}
 }

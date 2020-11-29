@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './Button';
+import Button from './utils/Button';
 import Input from './input/Input';
 import InputForm from './input/InputForm';
 import FileInput from './input/FileInput';

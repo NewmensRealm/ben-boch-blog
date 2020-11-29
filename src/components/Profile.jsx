@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Joi from 'joi-browser';
 import FancyInput from './input/FancyInput';
-import Button from './Button';
+import Button from './utils/Button';
 import { publishPost } from '../services/postService';
 
 export default function Profile() {
@@ -61,7 +61,7 @@ export default function Profile() {
 	};
 
 	return (
-		<div className="container">
+		<div className="profile-container">
 			<div className="profile">
 				<h1>Profile</h1>
 				<div className="profile-img"></div>

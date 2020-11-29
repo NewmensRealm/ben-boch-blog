@@ -1,0 +1,31 @@
+.rollbar {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	background-color: #575757;
+	margin-top: 5px;
+	.rb-item {
+		background-color: white;
+		border: none;
+		border-radius: 50%;
+		color: #575757;
+		padding: 10px 12px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 15px;
+		//margin: 5px;
+		transition: all 400ms ease;
+		&:hover {
+			cursor: pointer;
+			background-color: #b1b1b1;
+			transition: all 400ms ease;
+		}
+	}
+}
+.rb-elems {
+	display: flex;
+	width: 100%;
+	justify-content: space-evenly;
+	align-items: center;
+}

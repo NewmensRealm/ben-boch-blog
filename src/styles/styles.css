@@ -47,94 +47,82 @@ button.default:hover {
   transition: all 400ms ease;
 }
 
-#banner {
+.banner {
+  background-color: #575757;
+}
+
+.banner .header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 200px;
-  width: 100%;
-  background-color: black;
-  position: relative;
-}
-
-#banner span {
-  color: white;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  font-size: 50px;
-}
-
-#banner .bannerImg {
-  height: 180px;
-  width: 300px;
+  margin: 5px;
+  height: 50px;
   text-align: center;
-  background-color: black;
+  color: white;
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  padding-left: 5%;
 }
 
-#banner .bannerImg img {
-  position: relative;
-  width: 180px;
-  height: 180px;
+.banner .header span {
+  padding-left: 5%;
 }
 
-#accessMenu {
+.sidebar-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
-  right: 5%;
-  top: 3%;
-}
-
-nav.sticky {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 0px;
+  background-color: #575757;
+  min-height: 100vh;
 }
 
-nav.sticky ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
+.sidebar-container .navbar {
+  position: relative;
+}
+
+.sidebar-container .navbar ul {
   list-style-type: none;
-  margin: 0;
   padding: 0;
-  background-color: #333;
-  width: 100%;
 }
 
-.active {
-  background-color: silver;
-  color: black;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-}
-
-.active:hover {
-  background-color: #111;
-  color: white;
-}
-
-li a {
-  display: block;
-  color: white;
+.sidebar-container .navbar .nav-item {
+  position: relative;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  background-color: #575757;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  -webkit-transition: background-color 400ms ease;
+  transition: background-color 400ms ease;
 }
 
-li a:hover {
-  background-color: #111;
+.sidebar-container .navbar .nav-item:hover {
+  background-color: #747272;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.sidebar-container .navbar .nav-item .nav-text {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: white;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
 }
 
 .form {
@@ -252,19 +240,12 @@ li a:hover {
 }
 
 .home {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: absolute;
-  left: 30%;
-  right: 30%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(500px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-gap: 10px;
+  margin-left: 10px;
 }
 
 .card {
@@ -703,14 +684,60 @@ img {
   margin-top: 10%;
 }
 
+.rollbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  background-color: #575757;
+  margin-top: 5px;
+}
+
+.rollbar .rb-item {
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  color: #575757;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.rollbar .rb-item:hover {
+  cursor: pointer;
+  background-color: #b1b1b1;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.rb-elems {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 body,
 html {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  -ms-overflow-style: none;
-  /* IE and Edge */
 }
 
 body::-webkit-scrollbar,
@@ -718,7 +745,22 @@ html::-webkit-scrollbar {
   display: none;
 }
 
-.container {
+.main-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 5fr;
+      grid-template-columns: 1fr 5fr;
+  overflow: hidden;
+}
+
+.content-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.profile-container {
   position: absolute;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -728,6 +770,12 @@ html::-webkit-scrollbar {
           justify-content: center;
   left: 30%;
   right: 30%;
+}
+
+.devider {
+  width: 100%;
+  height: 1px;
+  background-color: #bebcbc;
 }
 
 @media all and (max-width: 400px) {

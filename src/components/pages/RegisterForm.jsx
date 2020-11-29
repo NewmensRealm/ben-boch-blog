@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FancyInput from '../input/FancyInput';
-import Button from '../Button';
+import Button from '../utils/Button';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 export default function LoginForm() {

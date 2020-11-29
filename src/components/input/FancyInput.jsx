@@ -1,7 +1,14 @@
 import React, { useRef } from 'react';
-import Button from '../Button';
+import Button from '../utils/Button';
 
-export default function FancyInput({ accept, type, name, placeholder, onChange, icon }) {
+export default function FancyInput({
+	accept,
+	type,
+	name,
+	placeholder,
+	onChange,
+	icon,
+}) {
 	const fileInput = useRef();
 
 	const handleFilePick = () => {
