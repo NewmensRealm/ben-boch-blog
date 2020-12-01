@@ -3,7 +3,7 @@ import { apiEndpoint } from '../config.json';
 
 export function register(user) {
 	return http.post(`${apiEndpoint}/users`, {
-		name: user.name,
+		username: user.username,
 		email: user.email,
 		password: user.password,
 	});

@@ -3,6 +3,7 @@ import fs from 'fs';
 import { Post, validatePost, validateUpdatedPost } from '../models/post';
 import { User } from '../models/user';
 import multer from 'multer';
+import auth from '../middleware/auth';
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -32,6 +33,7 @@ router.get('/:id', async (req, res) => {
 
 router.post(
 	'/',
+	auth,
 	uploads.fields([
 		{ name: 'thumbnailImg', maxCount: 1 },
 		{ name: 'pdfDoc', maxCount: 1 },
@@ -63,6 +65,7 @@ router.post(
 
 router.put(
 	'/:id',
+	auth,
 	uploads.fields([
 		{ name: 'thumbnailImg', maxCount: 1 },
 		{ name: 'pdfDoc', maxCount: 1 },
@@ -73,31 +76,31 @@ router.put(
 
 		const post = await Post.findById(req.params.id);
 		if (!post) return res.status(400).send('Invalid post...');
-		
-		fs.unlinkSync(post.thumbnailImgPath)
-		fs.unlinkSync(post.pdfDocPath)
+
+		fs.unlinkSync(post.thumbnailImgPath);
+		fs.unlinkSync(post.pdfDocPath);
 
 		const updatedPost = await Post.findByIdAndUpdate(
-		req.params.id,
-		{
-			$set: {
-				title:req.body.title,
-				thumbnailImgPath: req.files['thumbnailImg'][0].path,
-				pdfDocPath:req.files['pdfDoc'][0].path,
-				description: req.body.description,
-				//date: Date.now,
+			req.params.id,
+			{
+				$set: {
+					title: req.body.title,
+					thumbnailImgPath: req.files['thumbnailImg'][0].path,
+					pdfDocPath: req.files['pdfDoc'][0].path,
+					description: req.body.description,
+					//date: Date.now,
+				},
 			},
-		},
-		{ new: true }
-	);
+			{ new: true }
+		);
 
-	if (!updatedPost) return res.status(400).send('Invalid input...');
+		if (!updatedPost) return res.status(400).send('Invalid input...');
 
-	res.send(updatedPost);
+		res.send(updatedPost);
 	}
 );
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
 	//const post = await Post.findByIdAndRemove(req.params.id);
 	const post = await Post.findById(req.params.id);
 	if (!post) return res.status(400).send('Post does not exists...');
