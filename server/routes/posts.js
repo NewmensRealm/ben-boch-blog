@@ -48,7 +48,7 @@ router.post(
 		const post = new Post({
 			author: {
 				_id: user._id,
-				name: user.name,
+				username: user.username,
 				rank: user.rank,
 			},
 			title: req.body.title,

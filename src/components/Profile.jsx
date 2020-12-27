@@ -3,6 +3,7 @@ import Joi from 'joi-browser';
 import FancyInput from './input/FancyInput';
 import Button from './utils/Button';
 import { publishPost } from '../services/postService';
+import { logout, getCurrentUser } from '../services/authService';
 
 export default function Profile() {
 	const [title, setTitle] = useState('');
@@ -10,6 +11,7 @@ export default function Profile() {
 	const [pdfDoc, setPdfDoc] = useState('');
 	const [description, setDescription] = useState('');
 	//const [error, setError] = useState({});
+	const [user, setUser] = useState(getCurrentUser());
 
 	const schema = {
 		title: Joi.string().trim().min(5).max(50).required().label('Title'),
@@ -40,21 +42,25 @@ export default function Profile() {
 		return errors;
 	};
 
+	const handleLogout = () => {
+		logout();
+		window.location = '/main';
+	};
 	const handlePublisher = async () => {
 		const result = validate();
 		console.log(result);
 		if (result) return null;
 
 		const fd = new FormData();
-		fd.append('userId', '5faf90b66aad8807403be61a');
+		fd.append('userId', getCurrentUser()._id);
 		fd.append('title', title);
 		fd.append('thumbnailImg', imgFile, imgFile.name);
 		fd.append('pdfDoc', pdfDoc, pdfDoc.name);
 		fd.append('description', description);
 
 		try {
-			const res = await publishPost(fd);
-			console.log(res);
+			await publishPost(fd);
+			window.location = '/main';
 		} catch (error) {
 			console.log(error);
 		}
@@ -63,23 +69,24 @@ export default function Profile() {
 	return (
 		<div className="profile-container">
 			<div className="profile">
-				<h1>Profile</h1>
+				<h1>{user.username}</h1>
 				<div className="profile-img"></div>
 			</div>
 			<div className="stats">
 				<div className="stats-item">
 					<span className="item-title">-Uploads-</span>
-					<span>0</span>
+					<span>{user.numOfPosts}</span>
 				</div>
 				<div className="stats-item">
 					<span className="item-title">-Rank-</span>
-					<span>Novice</span>
+					<span>{user.rank}</span>
 				</div>
 				<div className="stats-item">
 					<span className="item-title">-Clan-</span>
-					<span>Philosophers</span>
+					<span>{user.clan}</span>
 				</div>
 			</div>
+			<Button icon="fas fa-sign-out-alt" onClick={handleLogout} />
 			<div className="post-form">
 				<div className="form">
 					<h1 className="login-header">Post</h1>

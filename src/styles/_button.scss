@@ -3,10 +3,10 @@ button:focus {
 }
 
 button.default {
-	background-color: #575757;
+	background-color: $main-color1;
 	border: none;
 	border-radius: 10%;
-	color: white;
+	color: $main-color5;
 	padding: 10px;
 	text-align: center;
 	text-decoration: none;
@@ -17,16 +17,16 @@ button.default {
 
 	&:hover {
 		cursor: pointer;
-		background-color: #b1b1b1;
+		background-color: $main-color2;
 		transition: all 400ms ease;
 	}
 }
 
 .menuButton {
-	background-color: #575757;
+	background-color: $main-color1;
 	border: none;
 	border-radius: 50%;
-	color: white;
+	color: $main-color5;
 	padding: 10px 12px;
 	text-align: center;
 	text-decoration: none;
@@ -36,7 +36,7 @@ button.default {
 	transition: all 400ms ease;
 	&:hover {
 		cursor: pointer;
-		background-color: #b1b1b1;
+		background-color: $main-color2;
 		transition: all 400ms ease;
 	}
 }

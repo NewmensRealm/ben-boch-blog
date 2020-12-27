@@ -1,3 +1,4 @@
+@import './variables';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
 @import './button';
 @import './banner';
@@ -8,7 +9,8 @@
 @import './input';
 @import './intro';
 @import './profile';
-@import './rollbar';
+@import './topbar';
+
 body,
 html {
 	margin: 0;
@@ -27,6 +29,7 @@ html {
 
 .content-container {
 	display: flex;
+	flex-direction: column;
 	position: relative;
 }
 

@@ -4,10 +4,10 @@ button:focus {
 }
 
 button.default {
-  background-color: #575757;
+  background-color: #242038;
   border: none;
   border-radius: 10%;
-  color: white;
+  color: #f7ece1;
   padding: 10px;
   text-align: center;
   text-decoration: none;
@@ -20,16 +20,16 @@ button.default {
 
 button.default:hover {
   cursor: pointer;
-  background-color: #b1b1b1;
+  background-color: #9067c6;
   -webkit-transition: all 400ms ease;
   transition: all 400ms ease;
 }
 
 .menuButton {
-  background-color: #575757;
+  background-color: #242038;
   border: none;
   border-radius: 50%;
-  color: white;
+  color: #f7ece1;
   padding: 10px 12px;
   text-align: center;
   text-decoration: none;
@@ -42,13 +42,13 @@ button.default:hover {
 
 .menuButton:hover {
   cursor: pointer;
-  background-color: #b1b1b1;
+  background-color: #9067c6;
   -webkit-transition: all 400ms ease;
   transition: all 400ms ease;
 }
 
 .banner {
-  background-color: #575757;
+  background-color: #242038;
 }
 
 .banner .header {
@@ -58,7 +58,7 @@ button.default:hover {
   margin: 5px;
   height: 50px;
   text-align: center;
-  color: white;
+  color: #f7ece1;
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -80,7 +80,7 @@ button.default:hover {
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
-  background-color: #575757;
+  background-color: #242038;
   min-height: 100vh;
 }
 
@@ -98,7 +98,7 @@ button.default:hover {
   border: none;
   border-radius: 10px;
   height: 50px;
-  background-color: #575757;
+  background-color: #242038;
   text-align: center;
   margin-left: 10px;
   margin-right: 10px;
@@ -107,22 +107,28 @@ button.default:hover {
   transition: background-color 400ms ease;
 }
 
-.sidebar-container .navbar .nav-item:hover {
-  background-color: #747272;
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
-}
-
 .sidebar-container .navbar .nav-item .nav-text {
   position: absolute;
   left: 10%;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  color: white;
+  color: #f7ece1;
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
+}
+
+.sidebar-container .navbar .nav-item:hover {
+  background-color: #f7ece1;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.sidebar-container .navbar .nav-item:hover .nav-text {
+  color: #242038;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
 }
 
 .form {
@@ -244,6 +250,8 @@ button.default:hover {
   display: grid;
   -ms-grid-columns: (minmax(500px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-auto-rows: -webkit-min-content;
+  grid-auto-rows: min-content;
   grid-gap: 10px;
   margin-left: 10px;
 }
@@ -256,6 +264,18 @@ button.default:hover {
   border-radius: 20px;
   -webkit-box-shadow: 5px 5px 10px #b8b7b7;
           box-shadow: 5px 5px 10px #b8b7b7;
+}
+
+.card .post-header-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
 }
 
 .card .post-header {
@@ -684,52 +704,13 @@ img {
   margin-top: 10%;
 }
 
-.rollbar {
+.top-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  background-color: #575757;
-  margin-top: 5px;
-}
-
-.rollbar .rb-item {
-  background-color: white;
-  border: none;
-  border-radius: 50%;
-  color: #575757;
-  padding: 10px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
-}
-
-.rollbar .rb-item:hover {
-  cursor: pointer;
-  background-color: #b1b1b1;
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
-}
-
-.rb-elems {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 body,
@@ -757,6 +738,10 @@ html::-webkit-scrollbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   position: relative;
 }
 

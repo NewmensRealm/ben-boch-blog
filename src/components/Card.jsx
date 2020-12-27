@@ -4,8 +4,10 @@ import Input from './input/Input';
 import InputForm from './input/InputForm';
 import FileInput from './input/FileInput';
 import Joi from 'joi-browser';
+import { getCurrentUser } from '../services/authService';
 
 export default function Card({
+	author,
 	title,
 	img,
 	pdf,
@@ -67,7 +69,12 @@ export default function Card({
 
 	return (
 		<div className="card">
-			<h2 className="post-header">{title}</h2>
+			<div className="post-header-section">
+				<h2 className="post-header">{title}</h2>
+				<span>
+					`by <strong>{author} </strong>`
+				</span>
+			</div>
 			{img && (
 				<img
 					className="thumbnail"
@@ -118,14 +125,18 @@ export default function Card({
 				</InputForm>
 			)}
 			<div className="btn-section">
-				<button
-					className="modify"
-					onClick={() => setModifyMod(!modifyMod)}>
-					Modify
-				</button>
-				<button className="delete" onClick={onClickDelete}>
-					Delete
-				</button>
+				{getCurrentUser() && getCurrentUser().username === author ? (
+					<div>
+						<button
+							className="modify"
+							onClick={() => setModifyMod(!modifyMod)}>
+							Modify
+						</button>
+						<button className="delete" onClick={onClickDelete}>
+							Delete
+						</button>
+					</div>
+				) : null}
 				<button className="read-more" onClick={readPost}>
 					Read More
 				</button>

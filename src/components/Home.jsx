@@ -55,6 +55,7 @@ export default function Home() {
 			{posts.map((post) => (
 				<Card
 					key={post._id}
+					author={post.author.username}
 					title={post.title}
 					img={post.thumbnailImgPath}
 					pdf={post.pdfDocPath}

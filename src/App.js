@@ -6,15 +6,16 @@ import Main from './components/pages/Main';
 import LoginForm from './components/pages/LoginForm';
 import RegisterForm from './components/pages/RegisterForm';
 import Profile from './components/Profile';
+import ProtectedRoute from './components/utils/ProtectedRoute';
 
 function App() {
 	return (
 		<Switch>
 			<Route path="/intro" component={Intro} />
-			<Route path="/main" component={Main} />
-			<Route path="/login" component={LoginForm} />
 			<Route path="/register" component={RegisterForm} />
-			<Route path="/profile" component={Profile} />
+			<Route path="/login" component={LoginForm} />
+			<Route path="/main" component={Main} />
+			<ProtectedRoute path="/profile" component={Profile} />
 			<Redirect from="/" exact to="/intro" />
 		</Switch>
 	);

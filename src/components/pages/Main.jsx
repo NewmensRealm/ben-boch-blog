@@ -6,17 +6,17 @@ import Home from '../Home';
 import Gallery from '../Gallery';
 import Contact from '../Contact';
 import About from '../About';
-import Devider from '../utils/Devider';
+import TopBar from '../TopBar';
 
 export default function Main() {
 	return (
 		<div className="main-container">
 			<div className="sidebar-container">
 				<Banner />
-				<Devider />
 				<NavBar />
 			</div>
 			<div className="content-container">
+				<TopBar />
 				<Switch>
 					<Route path="/main/home" component={Home} />
 					<Route path="/main/gallery" component={Gallery} />

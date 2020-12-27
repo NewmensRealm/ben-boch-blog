@@ -11,8 +11,10 @@ export default function LoginForm() {
 	const handleLogin = async () => {
 		try {
 			await login(user.email, user.password);
-			window.location = '/main';
-		} catch (error) {}
+			window.location = '/profile';
+		} catch (error) {
+			console.log('Something went wrong');
+		}
 	};
 
 	return (
