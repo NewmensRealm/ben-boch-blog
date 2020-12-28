@@ -1,17 +1,17 @@
 .banner {
 	background-color: $main-color1;
-	.header {
-		display: flex;
-		margin: 5px;
-		height: 50px;
-		text-align: center;
-		color: $main-color5;
-		font-size: 30px;
-		font-family: 'Roboto', sans-serif;
-		font-weight: 300;
+}
+.header {
+	display: flex;
+	margin: 5px;
+	height: 50px;
+	text-align: center;
+	color: $main-color5;
+	font-size: 30px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	padding-left: 5%;
+	span {
 		padding-left: 5%;
-		span {
-			padding-left: 5%;
-		}
 	}
 }

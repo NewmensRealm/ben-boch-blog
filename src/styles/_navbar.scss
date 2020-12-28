@@ -3,6 +3,7 @@
 	flex-direction: column;
 	position: sticky;
 	top: 0px;
+	align-self: flex-start;
 	background-color: $main-color1;
 	min-height: 100vh;
 	.navbar {

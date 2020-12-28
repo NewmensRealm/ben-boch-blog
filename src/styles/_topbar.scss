@@ -1,4 +1,8 @@
 .top-bar {
 	display: flex;
 	justify-content: flex-end;
+	position: sticky;
+	top: 0;
+	background-color: transparent;
+	z-index: 2;
 }

@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import Button from './utils/Button';
-import Input from './input/Input';
-import InputForm from './input/InputForm';
-import FileInput from './input/FileInput';
 import Joi from 'joi-browser';
 import { getCurrentUser } from '../services/authService';
 
@@ -88,42 +84,6 @@ export default function Card({
 			<div className="post-body">
 				<p className="text">{description}</p>
 			</div>
-			{modifyMod && (
-				<InputForm>
-					<Input
-						type="text"
-						placeholder="New Title"
-						onChange={(event) => setNewTitle(event.target.value)}
-					/>
-					<FileInput
-						icon="fas fa-file-image"
-						accept="image/jpeg,image/png"
-						placeholder="New image"
-						onChange={(event) =>
-							setNewImgFile(event.target.files[0])
-						}
-					/>
-					<FileInput
-						icon="fas fa-file-pdf"
-						accept="application/pdf"
-						placeholder="New PDF"
-						onChange={(event) =>
-							setNewPdfDoc(event.target.files[0])
-						}
-					/>
-					<Input
-						type="text"
-						placeholder="New Description"
-						onChange={(event) =>
-							setNewDescription(event.target.value)
-						}
-					/>
-					<Button
-						icon="fas fa-cloud-upload-alt"
-						onClick={updatePost}
-					/>
-				</InputForm>
-			)}
 			<div className="btn-section">
 				{getCurrentUser() && getCurrentUser().username === author ? (
 					<div>
