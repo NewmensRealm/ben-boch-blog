@@ -7,8 +7,13 @@ import auth from '../middleware/auth';
 const router = express.Router();
 
 router.get('/me', auth, async (req, res) => {
-	const user = await User.findById(req.user._id).select('password');
+	const user = await User.findById(req.user._id);
 	res.send(user);
+});
+
+router.get('/:id', async (req, res) => {
+	const user = await User.findById(req.params.id);
+	res.send(_.pick(user, ['_id', 'username', 'rank', 'numOfPosts', 'clan']));
 });
 
 //REGISTER USER
@@ -46,10 +51,6 @@ router.post('/', async (req, res) => {
 				'clan',
 			])
 		);
-
-	//res.send(
-	//	_.pick(user, ['_id', 'username', 'email', 'rank', 'numOfPosts', 'clan'])
-	//);
 });
 
 export default router;

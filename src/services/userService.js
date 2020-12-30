@@ -8,3 +8,7 @@ export function register(user) {
 		password: user.password,
 	});
 }
+
+export function getUser(userId) {
+	return http.get(`${apiEndpoint}/users/${userId}`);
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default function PopUp({ isOpen, children }) {
+export default function Modal({ isOpen, children }) {
 	if (!isOpen) return null;
 
 	return ReactDOM.createPortal(

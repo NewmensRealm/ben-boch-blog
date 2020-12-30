@@ -47,6 +47,15 @@ button.default:hover {
   transition: all 400ms ease;
 }
 
+.edit-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  border-radius: 20px;
+  background-color: #242038;
+}
+
 .banner {
   background-color: #242038;
 }
@@ -264,6 +273,7 @@ button.default:hover {
   height: auto;
   margin: 15px;
   border-radius: 20px;
+  background-color: white;
   -webkit-box-shadow: 5px 5px 10px #b8b7b7;
           box-shadow: 5px 5px 10px #b8b7b7;
 }
@@ -286,6 +296,11 @@ button.default:hover {
   margin-bottom: 1px;
   text-transform: capitalize;
   overflow: auto;
+}
+
+.card .user-link {
+  color: black;
+  cursor: pointer;
 }
 
 .thumbnail {
@@ -319,7 +334,7 @@ button.default:hover {
 .btn-section .read-more {
   margin-right: 20px;
   border: none;
-  color: dodgerblue;
+  color: #9067c6;
   background-color: transparent;
   text-decoration: underline;
   font-family: 'Roboto', sans-serif;
@@ -330,7 +345,7 @@ button.default:hover {
 }
 
 .btn-section .read-more:hover {
-  color: #005bb6;
+  color: #242038;
   font-size: 18px;
   font-weight: 500;
   -webkit-transition: all 400ms ease;
@@ -377,6 +392,28 @@ button.default:hover {
   font-weight: 500;
   -webkit-transition: all 400ms ease;
   transition: all 400ms ease;
+}
+
+.card-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.edit-bar {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #242038;
+  border-radius: 20px;
 }
 
 .grid-container {
@@ -489,10 +526,10 @@ button.default:hover {
 
 .input-container .basic-input {
   border: none;
-  border-bottom: 3px solid #8f8f8f;
+  border-bottom: 3px solid #242038;
   height: 30px;
   font-size: 20px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
 
@@ -513,6 +550,15 @@ button.default:hover {
 
 .file-input-container .file-input {
   border: none;
+}
+
+.text-area {
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  border: none;
+  border-bottom: 3px solid #242038;
+  font-weight: 300;
+  resize: none;
 }
 
 .intro-card {
@@ -775,7 +821,7 @@ img {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: #f7ece1b0;
   z-index: 1000;
 }
 
@@ -788,7 +834,8 @@ img {
   z-index: 1000;
   background: #fff;
   border-radius: 20px;
-  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 body,

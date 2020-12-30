@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Joi from 'joi-browser';
-import { publishPost, getPosts } from '../services/postService';
+import {
+	publishPost,
+	getPosts,
+	deletePost,
+	updatePost,
+} from '../services/postService';
 import { logout, getCurrentUser } from '../services/authService';
+import { getUser } from '../services/userService';
 import Card from './Card';
 import Header from './Header';
 import UserPropItem from './UserPropItem';
-import { Link } from 'react-router-dom';
-import PopUp from './PopUp';
-import FileInput from './input/FileInput';
-import Input from './input/Input';
-import InputForm from './input/InputForm';
-import PostForm from './PostForm';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import Modal from './Modal';
 import Button from './utils/Button';
+import PostForm from './forms/PostForm';
 
-export default function Profile() {
-	const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-
+export default function Profile(props) {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [previewImg, setPreviewImg] = useState(null);
+	const [resStatus, setResStatus] = useState(false);
 	//const [error, setError] = useState({});
-	const [user, setUser] = useState(getCurrentUser());
+	const [user, setUser] = useState({});
 	const [userPosts, setUserPosts] = useState([]);
 	const [postData, setPostData] = useState({
 		title: '',
@@ -26,13 +30,16 @@ export default function Profile() {
 		description: '',
 	});
 
+	const { id: urlUserId } = useParams();
+	const history = useHistory();
+
 	const handleLogout = () => {
 		logout();
-		window.location = '/main';
+		history.push('/main');
 	};
 
 	const schema = {
-		title: Joi.string().trim().min(5).max(50).required().label('Title'),
+		title: Joi.string().trim().min(3).max(50).required().label('Title'),
 		imgFile: Joi.object().required().label('Thumbnail Image'),
 		pdfDoc: Joi.object().required().label('PDF'),
 		description: Joi.string()
@@ -76,89 +83,115 @@ export default function Profile() {
 
 		try {
 			const res = await publishPost(fd);
-			console.log(res);
 			if (res.status === 200) {
-				setIsPopUpOpen(false);
+				setIsModalOpen(false);
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
+	const handleDelete = async (postId) => {
+		const originalPosts = userPosts;
+
+		const updatedPosts = originalPosts.filter((p) => p._id !== postId);
+		setUserPosts((prevPosts) => updatedPosts);
+		try {
+			await deletePost(postId);
+		} catch (error) {
+			if (error.response && error.response.status === 404)
+				console.log('This post has already been deleted.');
+			setUserPosts((prevPosts) => originalPosts);
+		}
+		const numOfPosts = user.numOfPosts - 1;
+		setUser((prevUser) => ({ ...user, numOfPosts }));
+	};
+
 	const fetchData = async () => {
 		const { data: posts } = await getPosts();
-		const userPosts = posts.filter((post) => post.author._id === user._id);
-		setUserPosts([...userPosts]);
+		const userPosts = posts.filter((post) => post.author._id === urlUserId);
+		const sortedUserPosts = userPosts.sort(
+			(a, b) => new Date(b.date) - new Date(a.date)
+		);
+
+		setUserPosts([...sortedUserPosts]);
+	};
+
+	const getUserProfile = async () => {
+		const { data: newUser } = await getUser(urlUserId);
+		setUser((prevUser) => newUser);
+	};
+
+	const handleReadPost = (childData, postId) => {
+		console.log(childData, postId);
+	};
+	const handleUpdatePost = async (childData, postId) => {
+		const { newTitle, newImgFile, newPdfDoc, newDescription } = childData;
+		let isNull = 0;
+		for (let item in childData) {
+			if (childData[item] == false) isNull++;
+		}
+		if (isNull === Object.keys(childData).length) return;
+
+		const fd = new FormData();
+		fd.append('title', newTitle);
+		newImgFile
+			? fd.append('thumbnailImg', newImgFile, newImgFile.name)
+			: fd.append('thumbnailImg', '');
+		newPdfDoc
+			? fd.append('pdfDoc', newPdfDoc, newPdfDoc.name)
+			: fd.append('pdfDoc', '');
+		fd.append('description', newDescription);
+
+		try {
+			const res = await updatePost(postId, fd);
+			if (res.status === 200) setResStatus(!resStatus);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	useEffect(() => {
+		getUserProfile();
 		fetchData();
-	}, [isPopUpOpen]);
+	}, [isModalOpen, resStatus]);
+
+	const handleImgUpdate = (event) => {
+		setPostData({
+			...postData,
+			imgFile: event.target.files[0],
+		});
+		setPreviewImg(URL.createObjectURL(event.target.files[0]));
+	};
 
 	return (
 		<div className="profile-container">
-			<PopUp isOpen={isPopUpOpen}>
-				<PostForm>
-					<InputForm>
-						<Input
-							type="text"
-							placeholder="Title"
-							onChange={(event) =>
-								setPostData({
-									...postData,
-									title: event.target.value,
-								})
-							}
-						/>
-						<img
-							className="thumbnail"
-							src="../assets/images/placeholder.png"
-							alt="New post thumbnail"
-						/>
-						<FileInput
-							type="file"
-							name="imgFile"
-							placeholder="Select image"
-							accept=".jpeg, .jpg, .png"
-							onChange={(event) =>
-								setPostData({
-									...postData,
-									imgFile: event.target.files[0],
-								})
-							}
-						/>
-						<FileInput
-							type="file"
-							name="pdfDoc"
-							placeholder="Select document"
-							accept="application/pdf"
-							onChange={(event) =>
-								setPostData({
-									...postData,
-									pdfDoc: event.target.files[0],
-								})
-							}
-						/>
-						<Input
-							type="text"
-							placeholder="Description"
-							onChange={(event) =>
-								setPostData({
-									...postData,
-									description: event.target.value,
-								})
-							}
-						/>
-					</InputForm>
-					<div>
-						<Button
-							title="Cancel"
-							onClick={() => setIsPopUpOpen(false)}
-						/>
-						<Button title="Publish" onClick={handlePublisher} />
-					</div>
-				</PostForm>
-			</PopUp>
+			<Modal isOpen={isModalOpen}>
+				<PostForm
+					onTitle={(event) =>
+						setPostData({
+							...postData,
+							title: event.target.value,
+						})
+					}
+					onImgFile={(event) => handleImgUpdate(event)}
+					img={previewImg}
+					onPdfDoc={(event) =>
+						setPostData({
+							...postData,
+							pdfDoc: event.target.files[0],
+						})
+					}
+					onDesc={(event) =>
+						setPostData({
+							...postData,
+							description: event.target.value,
+						})
+					}
+					cancel={() => setIsModalOpen(false)}
+					publish={handlePublisher}
+				/>
+			</Modal>
 
 			<div className="profile-bar">
 				<Header title={<strong>{user.username}</strong>} />
@@ -166,22 +199,30 @@ export default function Profile() {
 					<i className="far fa-user-circle fa-6x"></i>
 				</div>
 				<div className="user-props">
-					<UserPropItem
-						label="Number of Posts"
-						value={user.numOfPosts}
-					/>
+					<UserPropItem label="Posts" value={user.numOfPosts} />
 					<UserPropItem label="Rank" value={user.rank} />
-					<UserPropItem
-						label="Clan"
-						value={
-							user.clan === 'none' ? (
-								<Button title="Creat a Clan" />
-							) : (
-								user.clan
-							)
-						}
-					/>
-					<Button title="LogOut" onClick={handleLogout} />
+					{getCurrentUser() && getCurrentUser()._id === user._id ? (
+						<>
+							<UserPropItem
+								label="Clan"
+								value={
+									user.clan === 'none' ? (
+										<Button
+											title="Creat a Clan"
+											onClick={() =>
+												console.log(user.numOfPosts - 1)
+											}
+										/>
+									) : (
+										user.clan
+									)
+								}
+							/>
+							<Button title="LogOut" onClick={handleLogout} />
+						</>
+					) : (
+						<UserPropItem label="Clan" value={user.clan} />
+					)}
 				</div>
 				<div className="poly-footer">
 					<Link to="/main">
@@ -190,26 +231,42 @@ export default function Profile() {
 				</div>
 			</div>
 			<div className="user-posts">
-				<Button title="Add Post" onClick={() => setIsPopUpOpen(true)} />
-
-				{userPosts.map((post) => (
-					<Card
-						key={post._id}
-						author={post.author.username}
-						title={post.title}
-						img={post.thumbnailImgPath}
-						pdf={post.pdfDocPath}
-						description={post.description}
-						/*
-				onClickUpdate={(childData) =>
-					handleUpdatePost(childData, post._id)
-				}
-				onClickDelete={() => handleDelete(post._id)}
-				onClickRead={(childData) =>
-					handleReadPost(childData, post._id)
-				}*/
+				{getCurrentUser() && getCurrentUser()._id === user._id && (
+					<Button
+						title="Add Post"
+						onClick={() => setIsModalOpen(true)}
 					/>
-				))}
+				)}
+
+				{userPosts.length > 0 ? (
+					userPosts.map((post) => (
+						<Card
+							key={post._id}
+							author={post.author.username}
+							title={post.title}
+							img={post.thumbnailImgPath}
+							pdf={post.pdfDocPath}
+							description={post.description}
+							onClickDelete={() => handleDelete(post._id)}
+							onClickRead={(childData) =>
+								handleReadPost(childData, post._id)
+							}
+							onClickUpdate={(childData) =>
+								handleUpdatePost(childData, post._id)
+							}
+						/>
+					))
+				) : (
+					<Header
+						title="There is no posts here"
+						styles={{
+							color: '#242038',
+							fontWeight: 300,
+							display: 'flex',
+							justifyContent: 'center',
+						}}
+					/>
+				)}
 			</div>
 		</div>
 	);

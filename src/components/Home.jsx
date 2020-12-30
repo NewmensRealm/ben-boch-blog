@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
-import { getPosts, deletePost, updatePost } from '../services/postService';
+import { getPosts, updatePost } from '../services/postService';
+import Header from './Header';
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
 
 	const fetchData = async () => {
 		const { data: posts } = await getPosts();
-
-		setPosts([...posts]);
+		const sortedPosts = posts.sort(
+			(a, b) => new Date(b.date) - new Date(a.date)
+		);
+		setPosts([...sortedPosts]);
 	};
 
 	const handleUpdatePost = async (data, postId) => {
@@ -28,20 +31,6 @@ export default function Home() {
 		}
 	};
 
-	const handleDelete = async (postId) => {
-		const originalPosts = posts;
-
-		const updatedPosts = originalPosts.filter((p) => p._id !== postId);
-		setPosts((prevPosts) => updatedPosts);
-		try {
-			await deletePost(postId);
-		} catch (error) {
-			if (error.response && error.response.status === 404)
-				console.log('This movie has already been deleted.');
-			setPosts((prevPosts) => originalPosts);
-		}
-	};
-
 	const handleReadPost = (childData, postId) => {
 		console.log(childData, postId);
 	};
@@ -52,23 +41,34 @@ export default function Home() {
 
 	return (
 		<div className="home">
-			{posts.map((post) => (
-				<Card
-					key={post._id}
-					author={post.author.username}
-					title={post.title}
-					img={post.thumbnailImgPath}
-					pdf={post.pdfDocPath}
-					description={post.description}
-					onClickUpdate={(childData) =>
-						handleUpdatePost(childData, post._id)
-					}
-					onClickDelete={() => handleDelete(post._id)}
-					onClickRead={(childData) =>
-						handleReadPost(childData, post._id)
-					}
+			{posts.length > 0 ? (
+				posts.map((post) => (
+					<Card
+						key={post._id}
+						author={post.author}
+						title={post.title}
+						img={post.thumbnailImgPath}
+						pdf={post.pdfDocPath}
+						description={post.description}
+						onClickUpdate={(childData) =>
+							handleUpdatePost(childData, post._id)
+						}
+						onClickRead={(childData) =>
+							handleReadPost(childData, post._id)
+						}
+					/>
+				))
+			) : (
+				<Header
+					title="There is no posts here"
+					styles={{
+						color: '#242038',
+						fontWeight: 300,
+						display: 'flex',
+						justifyContent: 'center',
+					}}
 				/>
-			))}
+			)}
 		</div>
 	);
 }

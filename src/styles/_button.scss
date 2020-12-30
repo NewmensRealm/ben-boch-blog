@@ -40,3 +40,13 @@ button.default {
 		transition: all 400ms ease;
 	}
 }
+
+.edit-btn {
+	display: flex;
+	position: relative;
+	//justify-content: center;
+	//align-items: center;
+	//padding: 5px;
+	border-radius: 20px;
+	background-color: $main-color1;
+}

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import FancyInput from '../input/FancyInput';
 import Button from '../utils/Button';
 import '@fortawesome/fontawesome-free/css/all.css';
 import Joi from 'joi-browser';
 import { register } from '../../services/userService';
-import { loginWithJWT } from '../../services/authService';
+import { getCurrentUser, loginWithJWT } from '../../services/authService';
 
 export default function RegisterForm() {
 	const [newUserData, setnewUserData] = useState({
@@ -13,6 +13,8 @@ export default function RegisterForm() {
 		email: '',
 		password: '',
 	});
+
+	const history = useHistory();
 
 	const schema = {
 		username: Joi.string()
@@ -52,7 +54,7 @@ export default function RegisterForm() {
 		try {
 			const response = await register(newUserData);
 			loginWithJWT(response.headers['x-auth-token']);
-			window.location = '/main';
+			history.push(`/profile/${getCurrentUser()._id}`);
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				console.log('User already registered...');

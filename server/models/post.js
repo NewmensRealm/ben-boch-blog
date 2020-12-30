@@ -7,7 +7,6 @@ export const postSchema = new Schema({
 	author: {
 		type: new Schema({
 			username: { type: String, required: true },
-			rank: { type: String, required: true },
 		}),
 		required: true,
 	},
@@ -34,7 +33,7 @@ export const Post = mongoose.model('Post', postSchema);
 export function validatePost(post) {
 	const schema = Joi.object({
 		userId: Joi.objectId().required(),
-		title: Joi.string().required().min(5).max(50),
+		title: Joi.string().required().min(3).max(50),
 		thumbnailImgPath: Joi.string(),
 		pdfDocPath: Joi.string(),
 		description: Joi.string().required().min(10).max(255),
@@ -45,11 +44,10 @@ export function validatePost(post) {
 
 export function validateUpdatedPost(post) {
 	const schema = Joi.object({
-		title: Joi.string().min(5).max(50),
-		thumbnailImgPath: Joi.string(),
-		pdfDocPath: Joi.string(),
-		description: Joi.string().min(10).max(255),
-		date: Joi.date(),
+		title: Joi.string().max(50).allow(''),
+		thumbnailImg: Joi.string().allow(''),
+		pdfDoc: Joi.string().allow(''),
+		description: Joi.string().max(255).allow(''),
 	});
 	return schema.validate(post);
 }

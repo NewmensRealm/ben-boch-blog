@@ -41,10 +41,6 @@ userSchema.methods.generateAuthToken = function () {
 			_id: this._id,
 			username: this.username,
 			isAdmin: this.isAdmin,
-			rank: this.rank,
-			numOfPosts: this.numOfPosts,
-			clan: this.clan,
-			profilePicturePath: this.profilePhotoPath,
 		},
 		process.env.ACCESS_TOKEN_SECRET
 	);

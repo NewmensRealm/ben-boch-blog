@@ -7,6 +7,7 @@ export default function FileInput({
 	icon,
 	placeholder,
 	onChange,
+	styles,
 }) {
 	return (
 		<div className="file-input-container">
@@ -21,6 +22,7 @@ export default function FileInput({
 				type="file"
 				accept={accept}
 				onChange={onChange}
+				style={styles}
 			/>
 		</div>
 	);

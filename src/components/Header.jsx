@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function Header({ icon, title }) {
+export default function Header({ icon, title, styles }) {
 	return (
-		<div className="header">
+		<div className="header" style={styles}>
 			{icon && <i className={icon}></i>}
-			<span>{title}</span>
+			<label>{title}</label>
 		</div>
 	);
 }

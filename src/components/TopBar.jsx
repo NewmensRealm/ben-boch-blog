@@ -14,7 +14,7 @@ export default function TopBar() {
 		<div className="top-bar">
 			{getCurrentUser() ? (
 				<>
-					<Link to="/profile">
+					<Link to={`/profile/${getCurrentUser()._id}`}>
 						<Button title="Profile" />
 					</Link>
 

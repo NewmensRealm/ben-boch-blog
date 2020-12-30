@@ -10,9 +10,8 @@
 	width: 90%;
 	height: auto;
 	margin: 15px;
-	//padding-left: 10px;
 	border-radius: 20px;
-	//background-color: red;
+	background-color: white;
 	box-shadow: 5px 5px 10px rgb(184, 183, 183);
 	.post-header-section {
 		display: flex;
@@ -25,6 +24,10 @@
 		margin-bottom: 1px;
 		text-transform: capitalize;
 		overflow: auto;
+	}
+	.user-link {
+		color: black;
+		cursor: pointer;
 	}
 }
 .thumbnail {
@@ -54,7 +57,7 @@
 	.read-more {
 		margin-right: 20px;
 		border: none;
-		color: dodgerblue;
+		color: $main-color2;
 		background-color: transparent;
 		text-decoration: underline;
 		//text-decoration-thickness: 1px;
@@ -63,7 +66,7 @@
 		font-size: 16px;
 		transition: 400ms ease;
 		&:hover {
-			color: rgb(0, 91, 182);
+			color: $main-color1;
 			font-size: 18px;
 			font-weight: 500;
 			transition: all 400ms ease;
@@ -105,4 +108,17 @@
 			transition: all 400ms ease;
 		}
 	}
+}
+
+.card-container {
+	display: flex;
+	align-items: center;
+}
+
+.edit-bar {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background-color: $main-color1;
+	border-radius: 20px;
 }

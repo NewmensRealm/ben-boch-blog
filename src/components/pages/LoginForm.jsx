@@ -3,15 +3,18 @@ import { Link } from 'react-router-dom';
 import FancyInput from '../input/FancyInput';
 import Button from '../utils/Button';
 import '@fortawesome/fontawesome-free/css/all.css';
-import { login } from '../../services/authService';
+import { getCurrentUser, login } from '../../services/authService';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginForm() {
 	const [user, setUser] = useState({ email: '', password: '' });
+	const history = useHistory();
 
 	const handleLogin = async () => {
 		try {
 			await login(user.email, user.password);
-			window.location = '/profile';
+			const userId = getCurrentUser()._id;
+			history.push(`/profile/${userId}`);
 		} catch (error) {
 			console.log('Something went wrong');
 		}

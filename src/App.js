@@ -6,7 +6,6 @@ import Main from './components/pages/Main';
 import LoginForm from './components/pages/LoginForm';
 import RegisterForm from './components/pages/RegisterForm';
 import Profile from './components/Profile';
-import ProtectedRoute from './components/utils/ProtectedRoute';
 
 function App() {
 	return (
@@ -15,7 +14,12 @@ function App() {
 			<Route path="/register" component={RegisterForm} />
 			<Route path="/login" component={LoginForm} />
 			<Route path="/main" component={Main} />
-			<ProtectedRoute path="/profile" component={Profile} />
+			<Route
+				path="/profile/:id"
+				render={(props) => {
+					return <Profile {...props} />;
+				}}
+			/>
 			<Redirect from="/" exact to="/intro" />
 		</Switch>
 	);

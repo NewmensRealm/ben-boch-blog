@@ -4,6 +4,7 @@ import { Post, validatePost, validateUpdatedPost } from '../models/post';
 import { User } from '../models/user';
 import multer from 'multer';
 import auth from '../middleware/auth';
+import * as _ from 'lodash';
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	const post = await Post.findById(req.params.id);
 	if (!post) return res.status(400).send('Post not found');
-	res.send(post);
+	res.send(post).status(200);
 });
 
 router.post(
@@ -49,17 +50,20 @@ router.post(
 			author: {
 				_id: user._id,
 				username: user.username,
-				rank: user.rank,
 			},
 			title: req.body.title,
 			thumbnailImgPath: req.files['thumbnailImg'][0].path,
 			pdfDocPath: req.files['pdfDoc'][0].path,
 			description: req.body.description,
-			//date: Date.now,
 		});
 
 		await post.save();
-		res.send(post);
+
+		const updatedUser = await User.findByIdAndUpdate(user._id, {
+			$inc: { numOfPosts: 1 },
+		});
+
+		res.send({ post, updatedUser }).status(200);
 	}
 );
 
@@ -77,18 +81,23 @@ router.put(
 		const post = await Post.findById(req.params.id);
 		if (!post) return res.status(400).send('Invalid post...');
 
-		fs.unlinkSync(post.thumbnailImgPath);
-		fs.unlinkSync(post.pdfDocPath);
+		const onlyUpdate = _.pickBy(req.body, _.identity);
+
+		if (req.files['thumbnailImg']) {
+			onlyUpdate['thumbnailImgPath'] = req.files['thumbnailImg'][0].path;
+			fs.unlinkSync(post.thumbnailImgPath);
+		}
+		if (req.files['pdfDoc']) {
+			onlyUpdate['pdfDocPath'] = req.files['pdfDoc'][0].path;
+			fs.unlinkSync(post.pdfDocPath);
+		}
 
 		const updatedPost = await Post.findByIdAndUpdate(
 			req.params.id,
 			{
 				$set: {
-					title: req.body.title,
-					thumbnailImgPath: req.files['thumbnailImg'][0].path,
-					pdfDocPath: req.files['pdfDoc'][0].path,
-					description: req.body.description,
-					//date: Date.now,
+					...onlyUpdate,
+					date: Date.now(),
 				},
 			},
 			{ new: true }
@@ -96,24 +105,22 @@ router.put(
 
 		if (!updatedPost) return res.status(400).send('Invalid input...');
 
-		res.send(updatedPost);
+		res.send(updatedPost).status(200);
 	}
 );
 
 router.delete('/:id', auth, async (req, res) => {
-	//const post = await Post.findByIdAndRemove(req.params.id);
 	const post = await Post.findById(req.params.id);
 	if (!post) return res.status(400).send('Post does not exists...');
 	try {
 		fs.unlinkSync(post.thumbnailImgPath);
 		fs.unlinkSync(post.pdfDocPath);
-
-		console.log('successfully deleted resources');
 	} catch (err) {
-		console.log('Error occured');
+		res.sendStatus(400);
 	}
 	await Post.findByIdAndDelete(req.params.id);
-	res.send(post);
+	await User.findByIdAndUpdate(post.author._id, { $inc: { numOfPosts: -1 } });
+	res.send(post).status(200);
 });
 
 export default router;
