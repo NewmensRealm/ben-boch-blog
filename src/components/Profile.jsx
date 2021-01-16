@@ -147,12 +147,14 @@ export default function Profile(props) {
 									)
 								}
 							/>
-							<Button title="LogOut" onClick={handleLogout} />
 						</>
 					) : (
 						<UserPropItem label="Clan" value={user.clan} />
 					)}
 				</div>
+				{getCurrentUser() && getCurrentUser()._id === user._id && (
+					<Button title="LogOut" onClick={handleLogout} />
+				)}
 				<div className="poly-footer">
 					<Link to="/main">
 						<i className="fab fa-accusoft fa-10x footer-icon"></i>

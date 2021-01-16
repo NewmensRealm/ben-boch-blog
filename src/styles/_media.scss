@@ -1,25 +1,78 @@
 @media all and(max-width: 400px) {
-	#banner {
-		height: 100px;
-		span {
-			margin-left: 20px;
-		}
-	}
-	#bannerImg {
-		display: none;
-	}
-	#accessMenu {
+	.main-container {
+		display: flex;
 		flex-direction: column;
 	}
+	.sidebar-container {
+		height: 50px;
+		min-height: 0;
+		width: 100%;
+		z-index: 2;
+		.navbar {
+			display: none;
+		}
+	}
+	.top-bar {
+		display: none;
+	}
 	.home {
-		left: 5%;
-		right: 5%;
+		display: flex;
+		flex-direction: column;
+	}
+	.about-container {
+		margin-top: 30px;
+	}
+	.text-container {
+		flex-direction: column;
+		margin-left: 5%;
+		margin-right: 5%;
 	}
 	.grid-container {
 		display: flex;
 		flex-direction: column;
+		margin-top: 5%;
+		.long-ver {
+			writing-mode: horizontal-tb;
+		}
 	}
-	.long-ver {
-		writing-mode: horizontal-tb;
+	.profile-container {
+		flex-direction: column;
+		min-width: 100%;
+		min-height: 0;
+		.profile-bar {
+			position: static;
+			min-width: 100%;
+			min-height: 0;
+			.user-props {
+				flex-direction: row;
+				justify-content: space-evenly;
+				width: 100%;
+			}
+		}
+		.poly-footer {
+			display: none;
+		}
+		.user-posts {
+			width: 100%;
+			min-width: 0;
+		}
+	}
+	.pop-up {
+		transform: translate(-57%, -50%);
+	}
+	.card-container {
+		//flex-direction: column;
+		.edit-bar {
+			//flex-direction: row;
+			position: relative;
+			//z-index: 3;
+			transform: translateY(0);
+			transform: translateX(17px);
+			//margin-right: 5px;
+			max-width: 100%;
+		}
+	}
+	.burger-btn {
+		display: inline;
 	}
 }

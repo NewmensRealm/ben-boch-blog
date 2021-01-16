@@ -13,35 +13,47 @@
 			list-style-type: none;
 			padding: 0;
 		}
-		.nav-item {
-			position: relative;
-			border: none;
-			border-radius: 10px;
-			height: 50px;
-			background-color: $main-color1;
-			text-align: center;
-			margin-left: 10px;
-			margin-right: 10px;
-			margin-bottom: 5px;
-			transition: background-color 400ms ease;
-			.nav-text {
-				position: absolute;
-				left: 10%;
-				top: 50%;
-				transform: translateY(-50%);
-				color: $main-color5;
-				text-decoration: none;
-				font-family: 'Roboto', sans-serif;
-				font-weight: 500;
-			}
-			&:hover {
-				background-color: $main-color5;
-				transition: all 400ms ease;
-			}
-			&:hover .nav-text {
-				color: $main-color1;
-				transition: all 400ms ease;
-			}
-		}
 	}
+}
+
+.nav-item {
+	position: relative;
+	border: none;
+	border-radius: 10px;
+	height: 50px;
+	background-color: $main-color1;
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	transition: background-color 400ms ease;
+	.nav-text {
+		position: absolute;
+		left: 10%;
+		top: 50%;
+		transform: translateY(-50%);
+		color: $main-color5;
+		text-decoration: none;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 500;
+	}
+	&:hover {
+		background-color: $main-color5;
+		transition: all 400ms ease;
+	}
+	&:hover .nav-text {
+		color: $main-color1;
+		transition: all 400ms ease;
+	}
+}
+.modal-nav {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	right: 0;
+	left: 40%;
+	top: 0;
+	bottom: 0;
+	z-index: 1000;
+	background: $main-color1;
 }

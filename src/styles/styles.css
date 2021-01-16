@@ -74,6 +74,22 @@ button.default:hover {
 
 .banner {
   background-color: #242038;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.burger-btn {
+  display: none;
+  position: absolute;
+  top: 1%;
+  right: 1%;
 }
 
 .header {
@@ -121,7 +137,7 @@ button.default:hover {
   padding: 0;
 }
 
-.sidebar-container .navbar .nav-item {
+.nav-item {
   position: relative;
   border: none;
   border-radius: 10px;
@@ -135,7 +151,7 @@ button.default:hover {
   transition: background-color 400ms ease;
 }
 
-.sidebar-container .navbar .nav-item .nav-text {
+.nav-item .nav-text {
   position: absolute;
   left: 10%;
   top: 50%;
@@ -147,16 +163,33 @@ button.default:hover {
   font-weight: 500;
 }
 
-.sidebar-container .navbar .nav-item:hover {
+.nav-item:hover {
   background-color: #f7ece1;
   -webkit-transition: all 400ms ease;
   transition: all 400ms ease;
 }
 
-.sidebar-container .navbar .nav-item:hover .nav-text {
+.nav-item:hover .nav-text {
   color: #242038;
   -webkit-transition: all 400ms ease;
   transition: all 400ms ease;
+}
+
+.modal-nav {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  right: 0;
+  left: 40%;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: #242038;
 }
 
 .form {
@@ -917,24 +950,46 @@ html::-webkit-scrollbar {
 }
 
 @media all and (max-width: 400px) {
-  #banner {
-    height: 100px;
-  }
-  #banner span {
-    margin-left: 20px;
-  }
-  #bannerImg {
-    display: none;
-  }
-  #accessMenu {
+  .main-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
+  .sidebar-container {
+    height: 50px;
+    min-height: 0;
+    width: 100%;
+    z-index: 2;
+  }
+  .sidebar-container .navbar {
+    display: none;
+  }
+  .top-bar {
+    display: none;
+  }
   .home {
-    left: 5%;
-    right: 5%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .about-container {
+    margin-top: 30px;
+  }
+  .text-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   .grid-container {
     display: -webkit-box;
@@ -944,11 +999,57 @@ html::-webkit-scrollbar {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    margin-top: 5%;
   }
-  .long-ver {
+  .grid-container .long-ver {
     -webkit-writing-mode: horizontal-tb;
         -ms-writing-mode: lr-tb;
             writing-mode: horizontal-tb;
+  }
+  .profile-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    min-width: 100%;
+    min-height: 0;
+  }
+  .profile-container .profile-bar {
+    position: static;
+    min-width: 100%;
+    min-height: 0;
+  }
+  .profile-container .profile-bar .user-props {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    width: 100%;
+  }
+  .profile-container .poly-footer {
+    display: none;
+  }
+  .profile-container .user-posts {
+    width: 100%;
+    min-width: 0;
+  }
+  .pop-up {
+    -webkit-transform: translate(-57%, -50%);
+            transform: translate(-57%, -50%);
+  }
+  .card-container .edit-bar {
+    position: relative;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-transform: translateX(17px);
+            transform: translateX(17px);
+    max-width: 100%;
+  }
+  .burger-btn {
+    display: inline;
   }
 }
 /*# sourceMappingURL=styles.css.map */

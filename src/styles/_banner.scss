@@ -1,5 +1,14 @@
 .banner {
 	background-color: $main-color1;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.burger-btn {
+	display: none;
+	position: absolute;
+	top: 1%;
+	right: 1%;
 }
 .header {
 	display: flex;
