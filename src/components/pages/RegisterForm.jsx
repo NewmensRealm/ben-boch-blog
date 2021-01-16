@@ -13,6 +13,11 @@ export default function RegisterForm() {
 		email: '',
 		password: '',
 	});
+	const [errorMsg, setErrorMsg] = useState({
+		usernameError: '',
+		emailError: '',
+		passwordError: '',
+	});
 
 	const history = useHistory();
 
@@ -49,7 +54,15 @@ export default function RegisterForm() {
 	const handleRegister = async () => {
 		const result = validate();
 
-		if (result) return null;
+		if (result) {
+			const { username, email, password } = result;
+			setErrorMsg({
+				usernameError: username,
+				emailError: email,
+				passwordError: password,
+			});
+			return null;
+		}
 
 		try {
 			const response = await register(newUserData);
@@ -79,6 +92,7 @@ export default function RegisterForm() {
 								username: event.target.value,
 							})
 						}
+						error={errorMsg.usernameError}
 					/>
 					<FancyInput
 						type="email"
@@ -89,6 +103,7 @@ export default function RegisterForm() {
 								email: event.target.value,
 							})
 						}
+						error={errorMsg.emailError}
 					/>
 					<FancyInput
 						type="password"
@@ -100,6 +115,7 @@ export default function RegisterForm() {
 							})
 						}
 						newUserData
+						error={errorMsg.passwordError}
 					/>
 				</div>
 				<Button title="Register" onClick={handleRegister} />

@@ -37,7 +37,7 @@ export function validatePost(post) {
 		thumbnailImgPath: Joi.string(),
 		pdfDocPath: Joi.string(),
 		description: Joi.string().required().min(10).max(255),
-		date: Joi.date(),
+		//date: Joi.date(),
 	});
 	return schema.validate(post);
 }

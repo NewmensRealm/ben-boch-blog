@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Joi from 'joi-browser';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { getFile } from '../services/httpService';
 import { getCurrentUser } from '../services/authService';
 import Button from './utils/Button';
 import EditButton from './utils/EditButton';
@@ -13,13 +14,17 @@ export default function Card({
 	description,
 	onClickUpdate,
 	onClickDelete,
-	onClickRead,
 }) {
 	const [newTitle, setNewTitle] = useState('');
 	const [newImgFile, setNewImgFile] = useState('');
 	const [newPdfDoc, setNewPdfDoc] = useState('');
 	const [newDescription, setNewDescription] = useState('');
-
+	const [errorMsg, setErrorMsg] = useState({
+		newTitleError: '',
+		newImgError: '',
+		newPdfError: '',
+		newDescError: '',
+	});
 	const { id: urlUserId } = useParams();
 
 	const data = {
@@ -57,12 +62,24 @@ export default function Card({
 	const updatePost = () => {
 		const result = validate();
 		console.log(result);
-		if (result) return null;
+		if (result) {
+			const { newTitle, newImgFile, newPdfDoc, newDescription } = result;
+			setErrorMsg({
+				newTitleError: newTitle,
+				newImgError: newImgFile,
+				newPdfError: newPdfDoc,
+				newDescError: newDescription,
+			});
+			return null;
+		}
 		onClickUpdate(data);
 	};
 
-	const readPost = () => {
-		onClickRead('read');
+	const handleReadPost = async () => {
+		const resp = await getFile(`http://localhost:5000/${pdf}`);
+		const file = new Blob([resp.data], { type: 'application/pdf' });
+		const fileURL = URL.createObjectURL(file);
+		window.open(fileURL);
 	};
 
 	return (
@@ -85,9 +102,9 @@ export default function Card({
 						alt="Post thumbnail"
 					/>
 				)}
-				<div>
+				{/*<div>
 					<span>{pdf}</span>
-				</div>
+				</div>*/}
 				<div className="post-body">
 					<p className="text">{description}</p>
 				</div>
@@ -99,44 +116,57 @@ export default function Card({
 							</button>
 						</div>
 					) : null}
-					<button className="read-more" onClick={readPost}>
+					<button className="read-more" onClick={handleReadPost}>
 						Read More
 					</button>
 				</div>
 			</div>
-			{getCurrentUser() && getCurrentUser()._id === urlUserId ? (
-				<div className="edit-bar">
-					<EditButton
-						icon="fas fa-heading"
-						placeholder="New title"
-						onChange={(event) => setNewTitle(event.target.value)}
-					/>
-					<EditButton
-						icon="far fa-image"
-						fileInput
-						accept=".jpg, .jpeg, .png"
-						onChange={(event) =>
-							setNewImgFile(event.target.files[0])
-						}
-					/>
-					<EditButton
-						icon="far fa-file-pdf"
-						fileInput
-						accept="application/pdf"
-						onChange={(event) =>
-							setNewPdfDoc(event.target.files[0])
-						}
-					/>
-					<EditButton
-						icon="fas fa-align-left"
-						placeholder="New description"
-						onChange={(event) =>
-							setNewDescription(event.target.value)
-						}
-					/>
-					<Button icon="far fa-paper-plane" onClick={updatePost} />
-				</div>
-			) : null}
+			<div>
+				{getCurrentUser() && getCurrentUser()._id === urlUserId ? (
+					<div className="edit-bar">
+						<EditButton
+							icon="fas fa-heading"
+							placeholder="New title"
+							onChange={(event) =>
+								setNewTitle(event.target.value)
+							}
+							error={errorMsg.newTitleError}
+						/>
+						<EditButton
+							icon="far fa-image"
+							fileInput
+							accept=".jpg, .jpeg, .png"
+							onChange={(event) =>
+								setNewImgFile(event.target.files[0])
+							}
+							error={errorMsg.newImgError}
+						/>
+						<EditButton
+							icon="far fa-file-pdf"
+							fileInput
+							accept="application/pdf"
+							onChange={(event) =>
+								setNewPdfDoc(event.target.files[0])
+							}
+							error={errorMsg.newPdfError}
+						/>
+						<EditButton
+							icon="fas fa-align-left"
+							placeholder="New description"
+							onChange={(event) =>
+								setNewDescription(event.target.value)
+							}
+							error={errorMsg.newDescError}
+						/>
+						<div className="confirm-btn">
+							<Button
+								icon="far fa-paper-plane"
+								onClick={updatePost}
+							/>
+						</div>
+					</div>
+				) : null}
+			</div>
 		</div>
 	);
 }

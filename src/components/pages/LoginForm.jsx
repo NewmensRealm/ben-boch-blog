@@ -5,9 +5,12 @@ import Button from '../utils/Button';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { getCurrentUser, login } from '../../services/authService';
 import { useHistory } from 'react-router-dom';
+import Warning from '../utils/Warning';
 
 export default function LoginForm() {
 	const [user, setUser] = useState({ email: '', password: '' });
+	const [errorMsg, setErrorMsg] = useState('');
+
 	const history = useHistory();
 
 	const handleLogin = async () => {
@@ -16,7 +19,7 @@ export default function LoginForm() {
 			const userId = getCurrentUser()._id;
 			history.push(`/profile/${userId}`);
 		} catch (error) {
-			console.log('Something went wrong');
+			setErrorMsg('Username or Password is Incorrect!');
 		}
 	};
 
@@ -43,6 +46,7 @@ export default function LoginForm() {
 						}
 					/>
 				</form>
+				<Warning message={errorMsg} />
 				<Button title="Log In" onClick={handleLogin} />
 			</div>
 		</>

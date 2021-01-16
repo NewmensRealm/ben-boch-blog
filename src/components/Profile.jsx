@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Joi from 'joi-browser';
 import {
 	publishPost,
 	getPosts,
@@ -18,17 +17,9 @@ import PostForm from './forms/PostForm';
 
 export default function Profile(props) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [previewImg, setPreviewImg] = useState(null);
 	const [resStatus, setResStatus] = useState(false);
-	//const [error, setError] = useState({});
 	const [user, setUser] = useState({});
 	const [userPosts, setUserPosts] = useState([]);
-	const [postData, setPostData] = useState({
-		title: '',
-		imgFile: '',
-		pdfDoc: '',
-		description: '',
-	});
 
 	const { id: urlUserId } = useParams();
 	const history = useHistory();
@@ -38,41 +29,8 @@ export default function Profile(props) {
 		history.push('/main');
 	};
 
-	const schema = {
-		title: Joi.string().trim().min(3).max(50).required().label('Title'),
-		imgFile: Joi.object().required().label('Thumbnail Image'),
-		pdfDoc: Joi.object().required().label('PDF'),
-		description: Joi.string()
-			.trim()
-			.min(10)
-			.max(255)
-			.required()
-			.label('Description'),
-	};
-	const validate = () => {
+	const handlePublisher = async (postData) => {
 		const { title, imgFile, pdfDoc, description } = postData;
-		const options = { abortEarly: false };
-		const { error } = Joi.validate(
-			{ title, imgFile, pdfDoc, description },
-			schema,
-			options
-		);
-
-		if (!error) return null;
-
-		const errors = {};
-		for (let item of error.details) {
-			errors[item.path[0]] = item.message;
-		}
-		return errors;
-	};
-
-	const handlePublisher = async () => {
-		const error = validate();
-		const { title, imgFile, pdfDoc, description } = postData;
-
-		console.log(error);
-		if (error) return null;
 
 		const fd = new FormData();
 		fd.append('userId', getCurrentUser()._id);
@@ -122,14 +80,11 @@ export default function Profile(props) {
 		setUser((prevUser) => newUser);
 	};
 
-	const handleReadPost = (childData, postId) => {
-		console.log(childData, postId);
-	};
 	const handleUpdatePost = async (childData, postId) => {
 		const { newTitle, newImgFile, newPdfDoc, newDescription } = childData;
 		let isNull = 0;
 		for (let item in childData) {
-			if (childData[item] == false) isNull++;
+			if (childData[item] === false) isNull++;
 		}
 		if (isNull === Object.keys(childData).length) return;
 
@@ -145,7 +100,9 @@ export default function Profile(props) {
 
 		try {
 			const res = await updatePost(postId, fd);
-			if (res.status === 200) setResStatus(!resStatus);
+			if (res.status === 200) {
+				setResStatus(!resStatus);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -156,38 +113,10 @@ export default function Profile(props) {
 		fetchData();
 	}, [isModalOpen, resStatus]);
 
-	const handleImgUpdate = (event) => {
-		setPostData({
-			...postData,
-			imgFile: event.target.files[0],
-		});
-		setPreviewImg(URL.createObjectURL(event.target.files[0]));
-	};
-
 	return (
 		<div className="profile-container">
 			<Modal isOpen={isModalOpen}>
 				<PostForm
-					onTitle={(event) =>
-						setPostData({
-							...postData,
-							title: event.target.value,
-						})
-					}
-					onImgFile={(event) => handleImgUpdate(event)}
-					img={previewImg}
-					onPdfDoc={(event) =>
-						setPostData({
-							...postData,
-							pdfDoc: event.target.files[0],
-						})
-					}
-					onDesc={(event) =>
-						setPostData({
-							...postData,
-							description: event.target.value,
-						})
-					}
 					cancel={() => setIsModalOpen(false)}
 					publish={handlePublisher}
 				/>
@@ -230,6 +159,7 @@ export default function Profile(props) {
 					</Link>
 				</div>
 			</div>
+
 			<div className="user-posts">
 				{getCurrentUser() && getCurrentUser()._id === user._id && (
 					<Button
@@ -248,9 +178,6 @@ export default function Profile(props) {
 							pdf={post.pdfDocPath}
 							description={post.description}
 							onClickDelete={() => handleDelete(post._id)}
-							onClickRead={(childData) =>
-								handleReadPost(childData, post._id)
-							}
 							onClickUpdate={(childData) =>
 								handleUpdatePost(childData, post._id)
 							}

@@ -44,9 +44,15 @@ button.default {
 .edit-btn {
 	display: flex;
 	position: relative;
-	//justify-content: center;
-	//align-items: center;
-	//padding: 5px;
+	padding-top: 10px;
+	//padding-right: 5px;
 	border-radius: 20px;
+	align-items: baseline;
 	background-color: $main-color1;
+}
+
+.confirm-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

@@ -17,6 +17,13 @@ export function setJwt(jwt) {
 	axios.defaults.headers.common['x-auth-token'] = jwt;
 }
 
+export function getFile(url) {
+	return axios(url, {
+		method: 'GET',
+		responseType: 'blob', //Force to receive data in a Blob Format
+	});
+}
+
 export default {
 	get: axios.get,
 	post: axios.post,

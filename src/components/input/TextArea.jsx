@@ -1,6 +1,7 @@
 import React from 'react';
+import Warning from '../utils/Warning';
 
-export default function TextArea({ onChange, placeholder }) {
+export default function TextArea({ error, onChange, placeholder }) {
 	return (
 		<>
 			<label htmlFor="post-description">Desription</label>
@@ -12,6 +13,7 @@ export default function TextArea({ onChange, placeholder }) {
 				cols="50"
 				placeholder={placeholder}
 				onChange={onChange}></textarea>
+			<Warning message={error} />
 		</>
 	);
 }

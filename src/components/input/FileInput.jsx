@@ -1,5 +1,5 @@
 import React from 'react';
-//import Button from '../Button';
+import Warning from '../utils/Warning';
 
 export default function FileInput({
 	accept,
@@ -8,22 +8,26 @@ export default function FileInput({
 	placeholder,
 	onChange,
 	styles,
+	error,
 }) {
 	return (
-		<div className="file-input-container">
-			{/*<Button icon={icon}/>
+		<>
+			<div className="file-input-container">
+				{/*<Button icon={icon}/>
             <label for="file-upload" class="custom-file-upload">
                 {placeholder}
     </label>*/}
-			<input
-				ref={refer}
-				id="file-upload"
-				className="file-input"
-				type="file"
-				accept={accept}
-				onChange={onChange}
-				style={styles}
-			/>
-		</div>
+				<input
+					ref={refer}
+					id="file-upload"
+					className="file-input"
+					type="file"
+					accept={accept}
+					onChange={onChange}
+					style={styles}
+				/>
+			</div>
+			<Warning message={error} />
+		</>
 	);
 }

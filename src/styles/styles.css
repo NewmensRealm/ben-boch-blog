@@ -52,8 +52,24 @@ button.default:hover {
   display: -ms-flexbox;
   display: flex;
   position: relative;
+  padding-top: 10px;
   border-radius: 20px;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   background-color: #242038;
+}
+
+.confirm-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .banner {
@@ -93,6 +109,7 @@ button.default:hover {
       align-self: flex-start;
   background-color: #242038;
   min-height: 100vh;
+  min-width: 200px;
 }
 
 .sidebar-container .navbar {
@@ -373,27 +390,6 @@ button.default:hover {
   transition: all 400ms ease;
 }
 
-.btn-section .modify {
-  margin-right: 20px;
-  border: none;
-  color: #35aa53;
-  background-color: transparent;
-  text-decoration: underline;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  -webkit-transition: 400ms ease;
-  transition: 400ms ease;
-}
-
-.btn-section .modify:hover {
-  color: #048804;
-  font-size: 18px;
-  font-weight: 500;
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
-}
-
 .card-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -403,8 +399,10 @@ button.default:hover {
           align-items: center;
 }
 
-.edit-bar {
-  position: relative;
+.card-container .edit-bar {
+  position: absolute;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -688,7 +686,6 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: relative;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -719,10 +716,10 @@ img {
   bottom: 0;
   left: 0;
   right: 0;
-  top: 50%;
+  top: 60%;
   background: #f7ece1;
-  -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
-          clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 70%, 100% 15%, 100% 100%, 0 100%);
+          clip-path: polygon(0 70%, 100% 15%, 100% 100%, 0 100%);
 }
 
 .profile-container .poly-footer .footer-icon {
@@ -836,6 +833,55 @@ img {
   border-radius: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.about-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.about-img {
+  width: 300px;
+  height: 300px;
+  border-radius: 200px;
+}
+
+.text-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.error-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  color: red;
+  font-size: 13px;
+  margin-bottom: 5px;
+  margin-top: 2px;
 }
 
 body,

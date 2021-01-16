@@ -1,6 +1,6 @@
 .profile-container {
 	display: flex;
-	position: relative;
+	//position: relative;
 	justify-content: center;
 
 	.profile-img {
@@ -21,9 +21,9 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		top: 50%;
+		top: 60%;
 		background: $main-color5;
-		clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+		clip-path: polygon(0 70%, 100% 15%, 100% 100%, 0 100%);
 		.footer-icon {
 			position: absolute;
 			bottom: 0;

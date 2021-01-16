@@ -9,6 +9,7 @@ export default function EditButton({
 	accept,
 	onChange,
 	placeholder,
+	error,
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
@@ -20,12 +21,14 @@ export default function EditButton({
 						accept={accept}
 						onChange={onChange}
 						styles={{ color: 'white' }}
+						error={error}
 					/>
 				) : (
 					<Input
 						type="text"
 						placeholder={placeholder}
 						onChange={onChange}
+						error={error}
 					/>
 				))}
 		</div>
