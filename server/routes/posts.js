@@ -110,7 +110,9 @@ router.put(
 );
 
 router.delete('/:id', auth, async (req, res) => {
+	//console.log(req.params.id);
 	const post = await Post.findById(req.params.id);
+	//console.log(post);
 	if (!post) return res.status(400).send('Post does not exists...');
 	try {
 		fs.unlinkSync(post.thumbnailImgPath);

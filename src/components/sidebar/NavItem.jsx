@@ -5,7 +5,7 @@ export default function NavItem({ name, onClick, destination, icon }) {
 	return (
 		<NavLink to={destination} style={{ textDecoration: 'none' }}>
 			<div className="nav-item" onClick={onClick}>
-				<label className="nav-text">{name}</label>
+				<span className="nav-text">{name}</span>
 				{icon && <i className={icon}></i>}
 			</div>
 		</NavLink>

@@ -1,11 +1,13 @@
 import React from 'react';
 import img from '../assets/images/about_img.jpg';
+import Header from './Header';
 
 export default function About() {
 	return (
 		<div>
 			<div className="about-container">
 				<img src={img} className="about-img" alt="B.E.N. Boch" />
+				<Header title="B.E.N. Boch" styles={{ color: 'black' }} />
 				<div className="text-container">
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.

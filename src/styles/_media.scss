@@ -1,4 +1,14 @@
-@media all and(max-width: 400px) {
+@media all and(max-width: 325px) {
+	.burger-btn {
+		display: inline;
+		top: 5px;
+		right: 5px;
+	}
+	.menuButton {
+		padding: 0;
+	}
+}
+@media all and(max-width: 750px) {
 	.main-container {
 		display: flex;
 		flex-direction: column;
@@ -57,9 +67,7 @@
 			min-width: 0;
 		}
 	}
-	.pop-up {
-		transform: translate(-57%, -50%);
-	}
+
 	.card-container {
 		//flex-direction: column;
 		.edit-bar {
@@ -67,12 +75,24 @@
 			position: relative;
 			//z-index: 3;
 			transform: translateY(0);
-			transform: translateX(17px);
+			transform: translateX(0);
 			//margin-right: 5px;
 			max-width: 100%;
 		}
 	}
 	.burger-btn {
 		display: inline;
+	}
+}
+
+@media all and(max-width: 770px) {
+	.profile-container {
+		justify-content: flex-start;
+	}
+	.sidebar-container {
+		min-width: 250px;
+	}
+	.edit-btn {
+		flex-direction: column;
 	}
 }

@@ -47,8 +47,8 @@ export default function Home() {
 						key={post._id}
 						author={post.author}
 						title={post.title}
-						img={post.thumbnailImgPath}
-						pdf={post.pdfDocPath}
+						img={post.thumbnailImgPath.replace(/\\/g, '/')}
+						pdf={post.pdfDocPath.replace(/\\/g, '/')}
 						description={post.description}
 						onClickUpdate={(childData) =>
 							handleUpdatePost(childData, post._id)

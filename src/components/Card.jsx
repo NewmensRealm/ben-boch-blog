@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Joi from 'joi-browser';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getFile } from '../services/httpService';
 import { getCurrentUser } from '../services/authService';
 import Button from './utils/Button';

@@ -123,6 +123,9 @@ export default function Profile(props) {
 			</Modal>
 
 			<div className="profile-bar">
+				<Link to="/main">
+					<Button icon="fas fa-arrow-left" />
+				</Link>
 				<Header title={<strong>{user.username}</strong>} />
 				<div className="profile-img">
 					<i className="far fa-user-circle fa-6x"></i>

@@ -13,7 +13,7 @@ export const postSchema = new Schema({
 	title: {
 		type: String,
 		trim: true,
-		minlength: 5,
+		minlength: 3,
 		maxlength: 50,
 		require: true,
 	},
@@ -34,8 +34,8 @@ export function validatePost(post) {
 	const schema = Joi.object({
 		userId: Joi.objectId().required(),
 		title: Joi.string().required().min(3).max(50),
-		thumbnailImgPath: Joi.string(),
-		pdfDocPath: Joi.string(),
+		thumbnailImgPath: Joi.object(),
+		pdfDocPath: Joi.object(),
 		description: Joi.string().required().min(10).max(255),
 		//date: Joi.date(),
 	});
