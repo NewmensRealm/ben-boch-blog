@@ -949,7 +949,7 @@ html::-webkit-scrollbar {
   position: relative;
 }
 
-@media all and (max-height: 545px) {
+@media all and (max-height: 750px) {
   .poly-footer {
     display: none;
   }

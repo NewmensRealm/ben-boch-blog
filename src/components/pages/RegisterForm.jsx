@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import Joi from 'joi-browser';
 import { register } from '../../services/userService';
 import { getCurrentUser, loginWithJWT } from '../../services/authService';
+import Warning from '../utils/Warning';
 
 export default function RegisterForm() {
 	const [newUserData, setnewUserData] = useState({
@@ -18,7 +19,7 @@ export default function RegisterForm() {
 		emailError: '',
 		passwordError: '',
 	});
-
+	const [registerError, setRegisterError] = useState('');
 	const history = useHistory();
 
 	const schema = {
@@ -70,7 +71,7 @@ export default function RegisterForm() {
 			history.push(`/profile/${getCurrentUser()._id}`);
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
-				console.log('User already registered...');
+				setRegisterError('User is already registered...');
 			}
 		}
 	};
@@ -119,6 +120,7 @@ export default function RegisterForm() {
 					/>
 				</div>
 				<Button title="Register" onClick={handleRegister} />
+				<Warning message={registerError} />
 			</div>
 		</>
 	);

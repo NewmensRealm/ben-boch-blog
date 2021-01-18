@@ -1,13 +1,13 @@
-@media all and(max-height: 545px){
-	.poly-footer{
+@media all and(max-height: 750px) {
+	.poly-footer {
 		display: none;
 	}
 	.pop-up {
 		//transform: translateX(-800%);
 		transform: scale(0.6);
 		//max-height:700px;
-		top:-20%;
-		left:20%;
+		top: -20%;
+		left: 20%;
 	}
 }
 @media all and(max-width: 325px) {
