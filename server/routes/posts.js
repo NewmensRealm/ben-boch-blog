@@ -40,7 +40,9 @@ router.post(
 		{ name: 'pdfDoc', maxCount: 1 },
 	]),
 	async (req, res) => {
+		console.log(req.body);
 		const { error } = validatePost(req.body);
+		console.log(error);
 		if (error) return res.status(400).send(error.details[0].message);
 
 		const user = await User.findById(req.body.userId);
@@ -110,9 +112,9 @@ router.put(
 );
 
 router.delete('/:id', auth, async (req, res) => {
-	//console.log(req.params.id);
+	console.log(req.params.id);
 	const post = await Post.findById(req.params.id);
-	//console.log(post);
+	console.log(post);
 	if (!post) return res.status(400).send('Post does not exists...');
 	try {
 		fs.unlinkSync(post.thumbnailImgPath);

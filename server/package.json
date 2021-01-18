@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "test",
 		"start": "node -r esm index.js",
-		"devStart":"nodemon -r esm index.js"
+		"devStart": "nodemon -r esm index.js"
 	},
 	"repository": {
 		"type": "git",
